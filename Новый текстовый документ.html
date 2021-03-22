@@ -1,0 +1,2948 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Duelingbook</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=1024">
+		<meta name="title" content="Duelingbook">
+		<meta name="description" content="Duelingbook is a Yu-Gi-Oh! Trading Card Game simulator that works right in your browser.">
+		<meta name="keywords" content="yugioh">
+		<meta property="og:title" content="Duelingbook">
+		<meta property="og:type" content="website">
+		<meta property="og:description" content="Duelingbook is a Yu-Gi-Oh! Trading Card Game simulator that works right in your browser.">
+		<meta property="og:image" content="https://www.duelingbook.com//site_image.jpg">
+		<meta property="og:url" content="https://www.duelingbook.com">
+		<meta property="og:site_name" content="Duelingbook">
+		<link rel="stylesheet" type="text/css" href="static/main.css?v=491">
+		<link rel="stylesheet" type="text/css" href="static/OverlayScrollbars.min.css">
+		<script src="static/jquery.min.js"></script>
+		<script src="static/jquery-ui.min.js"></script>
+		<script src="static/jquery.ui.touch-punch.min.js"></script>
+		<script src="static/jquery.overlayScrollbars.min.js"></script>
+		<script src="static/snap.svg-min.js"></script>
+		<script src="static/SnapSVGAnimator.min.js"></script>
+		<script src="static/TweenMax.min.js"></script>
+		<script src="static/watch.min.js"></script>
+		<script src="static/detect-zoom.js?v=2"></script>
+		<style>
+	</style>
+	</head>
+	<body>
+		<div id="black" style="background-color: black; width: 100%; height: 100%; z-index: 99;"></div>
+		<div id="content" class="unselectable" style="display: none;">
+			<img id="circuit_board" src="images/circuit_board_small.jpg" width="1024" height="724" alt="Background">
+			<div id="circuit_cover"></div>
+			<div id="greenlines">
+				<div id="greenlines1">
+					<img src="images/svg/greenlines.svg" alt="Green Lines">
+				</div>
+				<div id="greenlines2">
+					<img src="images/svg/greenlines.svg" alt="Green Lines">
+				</div>
+			</div>
+			<div id="dark"></div>
+			<div id="frames">
+				<div id="start">
+					<div id="white"></div>
+					<img id="spiral" src="images/blank.png" width="700" height="702" alt="Spiral" data-src="images/spiral.png">
+					<div class="cards">
+						<div id="card1" class="flying_card"></div>
+						<div id="card2" class="flying_card"></div>
+						<div id="card3" class="flying_card"></div>
+						<div id="card4" class="flying_card"></div>
+						<div id="card5" class="flying_card"></div>
+					</div>
+					<div id="monsters">
+						<img id="hornet" src="images/blank.png" width="700" height="700" alt="Inzektor Hornet" data-src="images/hornet_small.png">
+						<img id="neptabyss" src="images/blank.png" width="700" height="700" alt="Neptabyss, the Atlantean Prince" data-src="images/neptabyss_small.png">
+						<img id="hanzo" src="images/blank.png" width="700" height="700" alt="Ninja Grandmaster Hanzo" data-src="images/hanzo_small.png">
+						<img id="gorilla" src="images/blank.png" width="700" height="700" alt="Brotherhood of the Fire Fist - Gorilla" data-src="images/gorilla_small.png">
+						<img id="scout" src="images/blank.png" width="800" height="800" alt="Qliphort Scout" data-src="images/scout_small.png">
+						<img id="brionac" src="images/blank.png" width="1900" height="1900" alt="Nekroz of Brionac" data-src="images/brionac_small.png">
+					</div>
+				</div>
+				<div id="front_page">
+					<div class="content">
+						<img id="brionac_large" src="images/blank.png" width="1370" height="1370" alt="Nekroz of Brionac" data-src="images/brionac_small.png">
+						<!--<img id="brionac_large" src="images/pumpking_small.png" width="1370" height="1370" alt="Pumpking the King of Ghosts" />
+						<img id="brionac_large" src="images/turkey_small.png" width="1370" height="1370" alt="Mild Turkey" />-->
+						<div id="yugioh_logo">
+							<img src="images/blank.png" width="501" height="174" alt="Yugioh Logo" data-src="images/yugioh_logo_small.png">
+						</div>
+						<div id="db_logo">
+							<img id="db_logo_bottom" src="images/blank.png" width="510" height="319" alt="Duelingbook Logo" data-src="images/db_logo_bottom_small.png">
+							<img id="db_logo_top" src="images/blank.png" width="510" height="319" alt="Duelingbook Logo" data-src="images/db_logo_top_small.png">
+						</div>
+						<div id="login">
+							<div class="background"></div>
+							<span class="username_lbl">Username</span>
+							<input class="username_txt" type="text">
+							<span class="password_lbl">Password</span>
+							<input class="password_txt" type="password">
+							<input class="remember_cb" type="checkbox" checked>
+							<span class="remember_lbl">Remember me on this computer</span>
+							<input class="login_btn" type="submit" value="Log In">
+							<span class="register_btn">register</span>
+							<span class="forgot_password_btn">forgot password</span>
+						</div>
+						<div id="register">
+							<div class="background"></div>
+							<span class="username_lbl">Username</span>
+							<input class="username_txt" type="text">
+							<span class="password_lbl">Password</span>
+							<input class="password_txt" type="password">
+							<span class="email_lbl">E-mail</span>
+							<input class="email_txt" type="text">
+							<span class="remember_lbl">Note: you will need to confirm your e-mail</span>
+							<span class="back_btn">back</span>
+							<input class="register_btn" type="submit" value="Register">
+						</div>
+						<div id="forgot_password">
+							<div class="background"></div>
+							<span class="desc_txt">Enter the e-mail you used to register below. An e-mail will be sent with a link to reset your account's password.</span>
+							<span class="email_lbl">E-mail</span>
+							<input class="email_txt" type="text">
+							<span class="back_btn">back</span>
+							<input class="reset_password_btn" type="submit" value="Reset Password">
+						</div>
+						<div id="logged_in">
+							<div class="background"></div>
+							<span id="logged_in_as_lbl">Logged in as:</span>
+							<span class="username_txt"></span>
+							<span class="logout_btn">logout</span>
+						</div>
+						<div id="duel_btn" class="duel_btn">
+							<img src="images/blank.png" alt="Duel" data-src="images/svg/duel_btn_up.svg">
+						</div>
+						<div id="admin_admin_btn" class="admin_btn">
+							<img src="images/blank.png" alt="Admin" data-src="images/svg/admin_btn_up.svg">
+						</div>
+						<div id="admin_duel_btn" class="duel_btn">
+							<img src="images/blank.png" alt="Duel" data-src="images/svg/duel_btn_up.svg">
+						</div>
+						<div id="bulletin_txt" class="textarea" tabindex="0"></div>
+						<div id="donate_btn">
+							<img src="images/blank.png" width="92" height="26" alt="Donate" data-src="images/donate_btn.png">
+						</div>
+						<a href="https://discord.gg/VE3xQZc" target="_blank"><div id="discord_btn" class="discord_btn social_btn">
+							<div class="social_bg"></div>
+							<img src="images/blank.png" width="30" height="30" alt="Discord" data-src="images/discord.jpg">
+						</div></a>
+						<a href="https://www.instagram.com/duelingbook/" target="_blank"><div id="instagram_btn" class="instagram_btn social_btn">
+							<div class="social_bg"></div>
+							<img src="images/blank.png" width="30" height="30" alt="Instagram" data-src="images/instagram.jpg">
+						</div></a>
+						<a href="https://www.facebook.com/duelingbook/" target="_blank"><div id="facebook_btn" class="facebook_btn social_btn">
+							<div class="social_bg"></div>
+							<img src="images/blank.png" width="30" height="30" alt="Facebook" data-src="images/facebook.jpg">
+						</div></a>
+						<a href="https://www.youtube.com/user/duelingbook" target="_blank"><div id="youtube_btn" class="youtube_btn social_btn">
+							<div class="social_bg"></div>
+							<img src="images/blank.png" width="30" height="30" alt="Youtube" data-src="images/youtube.jpg">
+						</div></a>
+						<a href="https://twitter.com/duelingbook" target="_blank"><div id="twitter_btn" class="twitter_btn social_btn">
+							<div class="social_bg"></div>
+							<img src="images/blank.png" width="30" height="30" alt="Twitter" data-src="images/twitter.jpg">
+						</div></a>
+					</div>
+				</div>
+				<div id="connecting">
+					<span class="connection_status">Connecting...</span>
+				</div>
+				<div id="lost_conn">
+					<span class="connection_status2">Lost connection!<br>Reconnecting...</span>
+				</div>
+				<div id="lost_conn2">
+					<span class="connection_status2">Lost connection!<br>Please refresh the page.</span>
+				</div>
+				<div id="closed">
+					<span class="connection_status2">The server has closed.<br>Please refresh the page.</span>
+				</div>
+				<div id="banned">
+					<span class="connection_status">You are banned!</span>
+				</div>
+				<div id="already_logged_in">
+					<span class="connection_status2">Already logged into<br>duel server elsewhere!</span>
+				</div>
+				<div id="over_limit">
+					<span class="connection_status2">Maximum user limit reached!<br>Please try again later.</span>
+				</div>
+				<div id="rejected">
+					<span class="connection_status2">Rejected by server!<br>Try logging in again.</span>
+				</div>
+				<div id="kicked">
+					<span class="connection_status2">You have been kicked from<br>the server!</span>
+				</div>
+				<div id="timed_out">
+					<span class="connection_status">Timed out due to inactivity.</span>
+				</div>
+				<div id="terminated">
+					<span class="connection_status2">Your account has<br>been terminated!</span>
+				</div>
+				<div id="main_menu">
+					<div class="arial_black2 title1">Main Menu</div>				
+					<select id="status_cb">
+						 <option value="">All Statuses</option>
+						 <option value="popular">Most Popular</option>
+						 <option value="mine">My Statuses</option>
+						 <option value="following">Following</option>
+						 <!--<option value="friends">Friends</option>
+						 <option value="username">Search</option>-->
+					</select>
+					<div id="menu_content" class="arial_black2">
+						<div id="room_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Duel Room" data-src="images/svg/menu_btn_up.svg">
+							<span>Duel Room</span>
+						</div>
+						<div id="deck_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Deck Constructor" data-src="images/svg/menu_btn_up.svg">
+							<span>Deck Constructor</span>
+						</div>
+						<div id="profile_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Profile Viewer" data-src="images/svg/menu_btn_up.svg">
+							<span>Profile Viewer</span>
+						</div>
+						<div id="my_profile_btn" class="menu_btn">
+							<img src="images/blank.png" alt="My Profile" data-src="images/svg/menu_btn_up.svg">
+							<span>My Profile</span>
+						</div>
+						<div id="rankings_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Rankings" data-src="images/svg/menu_btn_up.svg">
+							<span>Rankings</span>
+						</div>
+						<div id="main_exit_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Exit" data-src="images/svg/menu_btn_up.svg">
+							<span>Exit</span>
+						</div>
+						<div id="administrator_btn" class="administrator_btn menu_btn menu_btn2">
+							<img src="images/blank.png" alt="Administrator Options" data-src="images/svg/administrator_btn_up.svg">
+							<span>Administrator<br>Options</span>
+						</div>
+						<div id="moderator_btn" class="moderator_btn menu_btn menu_btn2">
+							<img src="images/blank.png" alt="Moderator Options" data-src="images/svg/moderator_btn_up.svg">
+							<span>Moderator<br>Options</span>
+						</div>
+						<div id="tourneys_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Tournaments" data-src="images/svg/menu_btn_up.svg">
+							<span>Tournaments</span>
+						</div>
+						<div id="settings_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Settings" data-src="images/svg/menu_btn_up.svg">
+							<span>Settings</span>
+						</div>
+						<div id="messages_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Messages" data-src="images/svg/menu_btn_up.svg">
+							<span>Messages</span>
+						</div>
+						<div id="browse_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Browse Users" data-src="images/svg/menu_btn_up.svg">
+							<span>Browse Users</span>
+						</div>
+						<div id="friend_requests_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Friend Requests" data-src="images/svg/menu_btn_up.svg">
+							<span>Friend Requests</span>
+						</div>
+						<div id="friends_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Friends" data-src="images/svg/menu_btn_up.svg">
+							<span>Friends</span>
+						</div>
+						<div id="comments_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Comments" data-src="images/svg/menu_btn_up.svg">
+							<span>Comments</span>
+						</div>
+						<div id="following_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Followed Users" data-src="images/svg/menu_btn_up.svg">
+							<span>Followed Users</span>
+						</div>
+						<div id="blocked_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Blocked Users" data-src="images/svg/menu_btn_up.svg">
+							<span>Blocked Users</span>
+						</div>
+						<div id="password_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Change Password" data-src="images/svg/menu_btn_up.svg">
+							<span>Change Password</span>
+						</div>
+						<div id="records_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Duel Records" data-src="images/svg/menu_btn_up.svg">
+							<span>Duel Records</span>
+						</div>
+						<div id="forum_menu_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Forum" data-src="images/svg/menu_btn_up.svg">
+							<span>Forum</span>
+						</div>
+						<div id="discord_menu_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Discord" data-src="images/svg/menu_btn_up.svg">
+							<span>Discord</span>
+						</div>
+						<div id="tournament_btn" class="menu_btn menu_btn2">
+							<img src="images/blank.png" alt="Tournament Locator" data-src="images/svg/menu_btn_up.svg">
+							<span>Tournament<br>Locator</span>
+						</div>
+						<div id="custom_cards_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Custom Cards" data-src="images/svg/menu_btn_up.svg">
+							<span>Custom Cards</span>
+						</div>
+						<div id="customs_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Customs" data-src="images/svg/menu_btn_up.svg">
+							<span>Customs</span>
+						</div>
+						<div id="actions_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Admin Actions" data-src="images/svg/menu_btn_up.svg">
+							<span>Admin Actions</span>
+						</div>
+						<div id="frozen_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Frozen Users" data-src="images/svg/menu_btn_up.svg">
+							<span>Frozen Users</span>
+						</div>
+						<div id="beginners_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Beginners" data-src="images/svg/menu_btn_up.svg">
+							<span>Beginners</span>
+						</div>
+						<div id="notes_btn" class="menu_btn">
+							<img src="images/blank.png" alt="Notes" data-src="images/svg/menu_btn_up.svg">
+							<span>Notes</span>
+						</div>
+					</div>
+					<div id="statuses"></div>
+					<span id="post_status_btn">Post Status</span>
+					<div id="post_status">
+						<span class="title_lbl kristenitc">Post a Status Update:</span>
+						<textarea class="status_txt"></textarea>
+						<input class="post_btn" type="submit" value="Post Status">
+						<span class="html_lbl">HTML</span>
+						<input class="html_cb" type="checkbox">
+						<span class="nsfw_lbl">NSFW</span>
+						<input class="nsfw_cb" type="checkbox">
+					</div>
+					<div id="post_reply">
+						<span class="title_lbl kristenitc">Reply:</span>
+						<textarea class="status_txt"></textarea>
+						<input class="post_btn" type="submit" value="Post Reply">
+						<span class="html_lbl">HTML</span>
+						<input class="html_cb" type="checkbox">
+						<span class="nsfw_lbl">NSFW</span>
+						<input class="nsfw_cb" type="checkbox">
+					</div>
+					<div id="liked_by">
+						<img src="images/blank.png" alt="Liked By" data-src="images/svg/liked_by.svg">
+						<span class="liked_by_lbl">Liked by</span>
+						<div class="users list"></div>
+					</div>
+				</div>
+				<div id="duel_room">
+					<div id="formats">
+						<div id="formats_inner">
+							<div id="pools1">
+								<div id="ar" class="format">
+									<img src="images/blank.png" alt="Advanced Rated" data-src="images/svg/ar.svg">
+									<span class="format_txt arial_black2">Duelist Pool</span>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+									<div id="rated_options">
+										<div class="desc_txt">Join the pool and we will find a duelist for you to duel. Given the specified constraints, we will try to find a duelist close to your skill level.</div>
+										<span class="format_lbl">Format:</span>
+										<select class="format_cb">
+											<option value="ar">Advanced (Rated)</option>
+											<option value="gr">Goat Format (Rated)</option>
+											<option value="sr">Speed Duels (Rated)</option>
+											<option value="au">Advanced (Unrated)</option>
+											<option value="cu">Custom Cards (Unrated)</option>
+											<option value="gu">Goat Format (Unrated)</option>
+											<option value="tu">Traditional (Unrated)</option>
+											<option value="uu">Unlimited (Unrated)</option>
+											<option value="su">Speed Duels (Unrated)</option>
+											<option value="ru">Rush Duels (Unrated)</option>
+										</select>
+										<span class="rules_lbl">Rules:</span>
+										<select class="rules_cb">
+											<option value="TCG">TCG</option>
+											<option value="OCG">OCG</option>
+										</select>
+										<span class="type_lbl">Type:</span>
+										<select class="type_cb">
+											<option value="m">Match</option>
+											<option value="s">Single (with siding)</option>
+										</select>
+										<input class="join_btn button2" type="submit" value="Join Pool">
+									</div>
+								</div>
+								<div id="au" class="format">
+									<img src="images/blank.png" alt="Advanced Unrated" data-src="images/svg/au.svg">
+									<span class="format_txt arial_black2">Advanced (Unrated)</span>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+								</div>
+								<div id="cu" class="format">
+									<img src="images/blank.png" alt="Custom Cards" data-src="images/svg/cu.svg">
+									<span class="format_txt arial_black2">Custom Cards (Unrated)</span>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+								</div>
+							</div>
+							<div id="pools2">
+								<div id="gu" class="format">
+									<img src="images/blank.png" alt="Goat Format" data-src="images/svg/gu.svg">
+									<span class="format_txt arial_black2">Goat Format</span>
+									<div class="info_btn">
+										<img src="images/blank.png" alt="Info" data-src="images/svg/info_btn_up.svg">
+									</div>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+								</div>
+								<div id="tu" class="format">
+									<img src="images/blank.png" alt="Traditional" data-src="images/svg/tu.svg">
+									<span class="format_txt arial_black2">Traditional (Unrated)</span>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+								</div>
+								<div id="uu" class="format">
+									<img src="images/blank.png" alt="Unlimited" data-src="images/svg/uu.svg">
+									<span class="format_txt arial_black2">Unlimited (Unrated)</span>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+								</div>
+							</div>
+							<div id="pools3">
+								<div id="su" class="format">
+									<img src="images/blank.png" alt="Speed Duels" data-src="images/svg/su.svg">
+									<span class="format_txt arial_black2">Speed Duels</span>
+									<div class="info_btn">
+										<img src="images/blank.png" alt="Info" data-src="images/svg/info_btn_up.svg">
+									</div>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+								</div>
+								<div id="ru" class="format">
+									<img src="images/blank.png" alt="Rush Duels" data-src="images/svg/ru.svg">
+									<span class="format_txt arial_black2">Rush Duels</span>
+									<div class="info_btn">
+										<img src="images/blank.png" alt="Info" data-src="images/svg/info_btn_up.svg">
+									</div>
+									<div class="background"></div>
+									<div class="format_inner"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="pools_prev_btn" class="prev_btn">
+						<img src="images/blank.png" alt="Prev" data-src="images/svg/prev_btn_up.svg">
+					</div>
+					<div id="pools_next_btn" class="next_btn">
+						<img src="images/blank.png" alt="Next" data-src="images/svg/next_btn_up.svg">
+					</div>
+					<div id="decklist">
+						<img src="images/blank.png" alt="Decklist" data-src="images/svg/decklist.svg">
+						<span class="arial_black2">Deck</span>
+						<select id="decklist_cb"></select>
+						<input class="default_btn" type="submit" value="Set as Default">
+					</div>
+					<div id="mode">
+						<img src="images/blank.png" alt="Mode" data-src="images/svg/mode.svg">
+						<span id="mode_lbl" class="arial_black2">Mode</span>
+						<input class="duel_rb" type="radio" name="mode" checked>
+						<span class="duel_lbl">Duel</span><br>
+						<input class="watch_rb" type="radio" name="mode">
+						<span class="watch_lbl">Watch</span>
+					</div>
+					<div id="filter">
+						<img src="images/blank.png" alt="Filter" data-src="images/svg/filter.svg">
+						<span id="filter_lbl" class="arial_black2">Filter/Sort</span>
+						<div id="filter1">
+							<span class="username_lbl">Username:</span>
+							<input class="username_txt" type="text">
+							<span class="name_lbl">Search Card:</span>
+							<input class="name_txt" type="text">
+							<span class="match_type_lbl">Match Type:</span>
+							<select class="match_type_cb">
+								<option value="" label=" "></option>
+								<option value="s">Single (with siding)</option>
+								<option value="n">Single (no siding)</option>
+								<option value="m">2 out of 3 Match</option>
+							</select>
+							<span class="sort_lbl">Sort By:</span>
+							<select class="sort_cb">
+								<option value="rating_high">Rating</option>
+								<option value="friends">Relevance</option>
+								<option value="experience_high">Experience</option>
+								<option value="username">Username</option>
+							</select>
+							<div class="next_btn">
+								<img src="images/blank.png" alt="Next" data-src="images/svg/next_btn_up.svg">
+							</div>
+						</div>
+						<div id="filter2">
+							<input class="rating_lower_txt" type="text">
+							<span class="rating_lbl">≤ Rating ≤</span>
+							<input class="rating_upper_txt" type="text">
+							<input class="rep_lower_txt" type="text">
+							<span class="rep_lbl">≤ Experience ≤</span>
+							<input class="rep_upper_txt" type="text">
+							<span class="rules_lbl">Rules:</span>
+							<select class="rules_cb">
+								<option value="*" label="*"></option>
+								<option value="tcg">TCG</option>
+								<option value="ocg">OCG</option>
+							</select>
+							<span class="style_lbl">Style:</span>
+							<select class="style_cb">
+								<option value="" label=" "></option>
+								<option value="links">Links</option>
+								<option value="classic">Classic</option>
+								<option value="tag_duel">Tag Duel</option>
+							</select>
+							<div class="prev_btn">
+								<img src="images/blank.png" alt="Prev" data-src="images/svg/prev_btn_up.svg">
+							</div>
+						</div>
+					</div>
+					<div id="host_bg">
+						<img src="images/blank.png" alt="Host" data-src="images/svg/host.svg">
+						<span id="host_lbl" class="arial_black2">Host a Duel</span>
+						<div id="host">
+							<span class="format_lbl">Format:</span>
+							<select class="format_cb">
+								<option value="au">Advanced (Unrated)</option>
+								<option value="cu">Custom Cards (Unrated)</option>
+								<option value="gu">Goat Format (Unrated)</option>
+								<option value="tu">Traditional (Unrated)</option>
+								<option value="uu">Unlimited (Unrated)</option>
+								<option value="su">Speed Duels (Unrated)</option>
+								<option value="ru">Rush Duels (Unrated)</option>
+								<option value="so">Solo Mode</option>
+							</select>
+							<span class="type_lbl">Type:</span>
+							<select class="type_cb">
+								<option value="s">Single (with siding)</option>
+								<option value="n">Single (no siding)</option>
+								<option value="m">2 out of 3 Match</option>
+							</select>
+							<span class="rules_lbl">Rules:</span>
+							<select class="rules_cb">
+								<option value="*">TCG + OCG</option>
+								<option value="TCG">TCG</option>
+								<option value="OCG">OCG</option>
+							</select>
+							<input class="expert_cb" type="checkbox">
+							<span class="expert_lbl">Expert</span>
+							<input class="host_btn" type="submit" value="Host Duel">
+							<span class="duel_note_lbl">Duel Note:</span>
+							<input class="duel_note_txt" type="text">
+							<span class="duel_password_lbl">Duel Password:</span>
+							<input class="duel_password_txt" type="password">
+							<input class="watching_cb" type="checkbox" checked>
+							<span class="watching_lbl">Watching</span>
+							<input class="classic_cb" type="checkbox">
+							<span class="classic_lbl">Classic</span>
+							<input class="tag_duel_cb" type="checkbox">
+							<span class="tag_duel_lbl">Tag Duel</span>
+							<span class="watch_note_lbl">Watch Note:</span>
+							<input class="watch_note_txt" type="text">
+							<span class="watch_password_lbl">Watch Password:</span>
+							<input class="watch_password_txt" type="password">
+						</div>
+						<div id="hosting">
+							<div id="joinlist" class="list"></div>
+							<input class="accept_btn" type="submit" value="Accept User">
+							<input class="reject_btn" type="submit" value="Reject User">
+							<input class="cancel_btn" type="submit" value="Cancel Duel">
+						</div>
+						<div id="joining">
+							<span class="waiting_txt">Waiting for response from host...</span>
+							<input class="leave_btn" type="submit" value="Leave Duel">
+						</div>
+						<div id="joining_pool">
+							<span class="waiting_txt">Waiting for server to find dueling partner...</span>
+							<span class="status_txt">Partner found! Are you ready?<br>Time remaining: 10 seconds</span>
+							<input class="ready_btn" type="submit" value="Ready">
+							<input class="leave_btn" type="submit" value="Leave">
+						</div>
+					</div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="deck_constructor">
+					<img class="deck_constructor" src="images/blank.png" alt="Deck" data-src="images/svg/deck_constructor.svg">
+					<div id="deck_mask"></div>
+					<div id="side_mask"></div>
+					<div id="extra_mask"></div>
+					<span class="total_txt">0</span>
+					<span class="total_normal_txt">0</span>
+					<span class="total_effect_txt">0</span>
+					<span class="total_ritual_txt">0</span>
+					<span class="total_pendulum_txt">0</span>
+					<span class="total_spell_txt">0</span>
+					<span class="total_trap_txt">0</span>
+					<div class="token_btn">
+						<img src="images/blank.png" width="27" height="26" alt="Token" data-src="images/token_btn_up.png">
+					</div>
+					<div class="sort_btn">
+						<img src="images/blank.png" alt="Sort" data-src="images/svg/sort_btn_up.svg">
+					</div>
+					<div class="info_btn">
+						<img src="images/blank.png" alt="Randomize" data-src="images/svg/info_btn_up.svg">
+					</div>
+					<div id="preview_txt" class="textarea" tabindex="0"></div>
+					<input id="upload_ydk_btn" type="file" accept=".ydk, .xml, .txt">
+					<input id="import_btn" type="submit" value="Import Deck">
+					<input id="export_btn" type="submit" value="Export Deck">
+					<input id="clear_btn" type="submit" value="Clear Deck">
+					<input class="default_btn" type="submit" value="Set as Default">
+					<input id="new_btn" type="submit" value="New Deck">
+					<input id="rename_btn" type="submit" value="Rename Deck">
+					<input id="delete_btn" type="submit" value="Delete Deck">
+					<input id="save_btn" type="submit" value="Save Deck">
+					<input id="save_as_btn" type="submit" value="Save Deck As">
+					<input class="room_exit_btn" type="submit" value="Exit">
+					<div class="search">
+						<div id="search">
+							<img src="images/blank.png" alt="Search" data-src="images/svg/search.svg">
+							<div class="title_txt aliased">SEARCH</div>
+							<div class="more_options_btn">more<br>options</div>
+							<div class="prev_options_btn">prev<br>options</div>
+							<span class="name_lbl">Name:</span>
+							<input class="name_txt" type="text">
+							<span class="desc_lbl">Desc:</span>
+							<input class="desc_txt" type="text">
+							<span class="card_lbl">Card:</span>
+							<select class="card_cb">
+								<option value="" label=" "></option>
+								<option value="Monster">Monster</option>
+								<option value="Spell">Spell</option>
+								<option value="Trap">Trap</option>
+							</select>
+							<div id="search1">
+								<select class="card2_cb">
+									<option value="" label=" "></option>
+									<option value="Normal">Normal</option>
+									<option value="Effect">Effect</option>
+									<option value="Ritual">Ritual</option>
+									<option value="Fusion">Fusion</option>
+									<option value="Synchro">Synchro</option>
+									<option value="Xyz">Xyz</option>
+									<option value="Link">Link</option>
+									<option value="Pendulum">Pendulum</option>
+								</select>
+								<span class="type_lbl">Type:</span>
+								<select class="type_cb"></select>
+								<select class="type2_cb">
+									<option value="" label=" "></option>
+									<option value="Gemini">Gemini</option>
+									<option value="Spirit">Spirit</option>
+									<option value="Toon">Toon</option>
+									<option value="Tuner">Tuner</option>
+									<option value="Union">Union</option>
+								</select>
+								<span class="attrib_lbl">Attrib:</span>
+								<select class="attrib_cb">
+									<option value="" label=" "></option>
+									<option value="DARK">DARK</option>
+									<option value="DIVINE">DIVINE</option>
+									<option value="EARTH">EARTH</option>
+									<option value="FIRE">FIRE</option>
+									<option value="LIGHT">LIGHT</option>
+									<option value="WATER">WATER</option>
+									<option value="WIND">WIND</option>
+								</select>
+								<input class="lvll_txt" type="text" maxlength="2">
+								<span class="lvl_compare_lbl">≤         ≤</span>
+								<span class="lvl_rank_lbl">Lvl /<br>Rank</span>
+								<input class="lvlh_txt" type="text" maxlength="2">
+								<input class="atkl_txt" type="text" maxlength="4">
+								<span class="atk_lbl">≤ ATK ≤</span>
+								<input class="atkh_txt" type="text" maxlength="4">
+								<input class="defl_txt" type="text" maxlength="4">
+								<span class="def_lbl">≤ DEF ≤</span>
+								<input class="defh_txt" type="text" maxlength="4">
+							</div>
+							<div id="search2">
+								<div class="arrows">
+									<div class="arrow arrow1">
+										<img src="images/blank.png" alt="Top Left" data-src="images/card/black_arrow_corner.png">
+									</div>
+									<div class="arrow arrow2">
+										<img src="images/blank.png" alt="Top Center" data-src="images/card/black_arrow_side.png">
+									</div>
+									<div class="arrow arrow3">
+										<img src="images/blank.png" alt="Top Right" data-src="images/card/black_arrow_corner.png">
+									</div>
+									<div class="arrow arrow4">
+										<img src="images/blank.png" alt="Middle Right" data-src="images/card/black_arrow_side.png">
+									</div>
+									<div class="arrow arrow5">
+										<img src="images/blank.png" alt="Bottom Right" data-src="images/card/black_arrow_corner.png">
+									</div>
+									<div class="arrow arrow6">
+										<img src="images/blank.png" alt="Bottom Center" data-src="images/card/black_arrow_side.png">
+									</div>
+									<div class="arrow arrow7">
+										<img src="images/blank.png" alt="Bottom Left" data-src="images/card/black_arrow_corner.png">
+									</div>
+									<div class="arrow arrow8">
+										<img src="images/blank.png" alt="Middle Left" data-src="images/card/black_arrow_side.png">
+									</div>
+								</div>
+								<input class="pendulum_cb" type="checkbox">
+								<span class="pendulum_lbl">Pend</span>
+								<input class="scalel_txt" type="text" maxlength="2">
+								<span class="scale1_lbl">SCL</span>
+								<span class="scale2_lbl">≤    ≤</span>
+								<input class="scaleh_txt" type="text" maxlength="2">
+								<input class="tcg_cb" type="checkbox">
+								<span class="tcg_lbl">TCG</span>
+								<input class="ocg_cb" type="checkbox">
+								<span class="ocg_lbl">OCG</span>
+								<span class="custom_lbl">Cardpool:</span>
+								<select class="custom_cb">
+									<option value="0">Official Cards Only</option>
+									<option value="2">My Custom Cards</option>
+									<option value="1">All Custom Cards</option>
+								</select>
+							</div>
+							<span class="limit_lbl">Limit:</span>
+							<select class="limit_cb">
+								<option value="" label=" "></option>
+								<option value="0">0</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+							<span class="order_lbl">Order:</span>
+							<select class="order_cb">
+								<option value="Alpha">Alpha</option>
+								<option value="New First">New First</option>
+								<option value="Date">Release Date</option>
+							</select>
+							<input class="search_btn" type="submit" value="Search">
+							<span class="page_txt">0</span>
+							<span class="page2_txt">/</span>
+							<span class="tot_pages_txt">0</span>
+							<div class="search_prev_btn">
+								<img src="images/blank.png" alt="Prev" data-src="images/svg/search_prev_btn_up.svg">
+							</div>
+							<div class="search_next_btn">
+								<img src="images/blank.png" alt="Next" data-src="images/svg/search_next_btn_up.svg">
+							</div>
+							<div id="search_mask"></div>
+						</div>
+					</div>
+					<div class="cards"></div>
+					<div id="limit_reached">
+						<div class="background"></div>
+						<span class="arial_black">LIMIT<br>REACHED</span>
+					</div>
+					<div class="bypass_background"></div>
+					<input class="bypass_limit_cb" type="checkbox">
+					<span class="bypass_limit_lbl">Bypass Limit</span>
+					<input class="tcg_limit_rb" type="radio" name="limit" checked>
+					<span class="tcg_limit_lbl">TCG</span>
+					<input class="ocg_limit_rb" type="radio" name="limit">
+					<span class="ocg_limit_lbl">OCG</span>
+					<div id="token_select">
+						<div class="background"></div>
+						<div class="background_inner">
+							<div class="background"></div>
+							<div class="exit_btn">
+								<img src="images/blank.png" alt="Exit" data-src="images/svg/exit_btn_up.svg">
+							</div>
+							<span class="title_txt">TOKEN</span>
+							<div class="content"></div>
+							<div class="preview"></div>
+							<input class="save_token_btn" type="submit" value="Save">
+							<input class="delete_token_btn" type="submit" value="Delete Token">
+							<input class="browse_btn" type="file" accept=".jpg, .png, .jpeg, .gif">
+						</div>
+					</div>
+					
+					
+					
+					<div id="kde">
+						<div class="background"></div>
+						<div class="exit_btn">
+							<img src="images/blank.png" alt="Exit" data-src="images/svg/exit_btn_up.svg">
+						</div>
+						<div id="kde_decklist">
+							<span class="fullname_lbl">Full Name:</span>
+							<input class="fullname_txt" type="text">
+							<span class="date_lbl">Date:</span>
+							<input class="month_txt" type="text" maxlength="2">
+							<input class="day_txt" type="text" maxlength="2">
+							<input class="year_txt" type="text" maxlength="4">
+							<span class="initial_lbl">Last Initial:</span>
+							<input class="initial_txt" type="text">
+							<span class="id_lbl">Konami Player ID:</span>
+							<input class="id_txt" type="text" maxlength="10">
+							<span class="event_lbl">Event:</span>
+							<input class="event_txt" type="text">
+							<input class="show_totals_cb" type="checkbox" checked>
+							<span class="totals_lbl">Show Totals:</span>
+							<input class="print_btn" type="submit" value="Print">
+							<span class="error_txt"></span>
+							<div class="print_registration_btn">print regisration slip</div>
+							<div id="decklist_form">
+								<div id="decklist_content">
+									<img src="images/blank.png" alt="Decklist" data-src="images/blank.png">
+									<div class="content">
+										<span class="fullname_txt"></span>
+										<span class="date1_txt"></span>
+										<span class="date2_txt"></span>
+										<span class="date3_txt"></span>
+										<span class="date4_txt"></span>
+										<span class="date5_txt"></span>
+										<span class="date6_txt"></span>
+										<span class="date7_txt"></span>
+										<span class="date8_txt"></span>
+										<span class="initial_txt"></span>
+										<span class="total_main_txt"></span>
+										<span class="id1_txt"></span>
+										<span class="id2_txt"></span>
+										<span class="id3_txt"></span>
+										<span class="id4_txt"></span>
+										<span class="id5_txt"></span>
+										<span class="id6_txt"></span>
+										<span class="id7_txt"></span>
+										<span class="id8_txt"></span>
+										<span class="id9_txt"></span>
+										<span class="id10_txt"></span>
+										<span class="event_txt"></span>
+										<span class="ma1_txt"></span>
+										<span class="ma2_txt"></span>
+										<span class="ma3_txt"></span>
+										<span class="ma4_txt"></span>
+										<span class="ma5_txt"></span>
+										<span class="ma6_txt"></span>
+										<span class="ma7_txt"></span>
+										<span class="ma8_txt"></span>
+										<span class="ma9_txt"></span>
+										<span class="ma10_txt"></span>
+										<span class="ma11_txt"></span>
+										<span class="ma12_txt"></span>
+										<span class="ma13_txt"></span>
+										<span class="ma14_txt"></span>
+										<span class="ma15_txt"></span>
+										<span class="ma16_txt"></span>
+										<span class="ma17_txt"></span>
+										<span class="ma18_txt"></span>
+										<span class="mc1_txt"></span>
+										<span class="mc2_txt"></span>
+										<span class="mc3_txt"></span>
+										<span class="mc4_txt"></span>
+										<span class="mc5_txt"></span>
+										<span class="mc6_txt"></span>
+										<span class="mc7_txt"></span>
+										<span class="mc8_txt"></span>
+										<span class="mc9_txt"></span>
+										<span class="mc10_txt"></span>
+										<span class="mc11_txt"></span>
+										<span class="mc12_txt"></span>
+										<span class="mc13_txt"></span>
+										<span class="mc14_txt"></span>
+										<span class="mc15_txt"></span>
+										<span class="mc16_txt"></span>
+										<span class="mc17_txt"></span>
+										<span class="mc18_txt"></span>
+										<span class="total_monsters_txt"></span>
+										<span class="sa1_txt"></span>
+										<span class="sa2_txt"></span>
+										<span class="sa3_txt"></span>
+										<span class="sa4_txt"></span>
+										<span class="sa5_txt"></span>
+										<span class="sa6_txt"></span>
+										<span class="sa7_txt"></span>
+										<span class="sa8_txt"></span>
+										<span class="sa9_txt"></span>
+										<span class="sa10_txt"></span>
+										<span class="sa11_txt"></span>
+										<span class="sa12_txt"></span>
+										<span class="sa13_txt"></span>
+										<span class="sa14_txt"></span>
+										<span class="sa15_txt"></span>
+										<span class="sa16_txt"></span>
+										<span class="sa17_txt"></span>
+										<span class="sa18_txt"></span>
+										<span class="sc1_txt"></span>
+										<span class="sc2_txt"></span>
+										<span class="sc3_txt"></span>
+										<span class="sc4_txt"></span>
+										<span class="sc5_txt"></span>
+										<span class="sc6_txt"></span>
+										<span class="sc7_txt"></span>
+										<span class="sc8_txt"></span>
+										<span class="sc9_txt"></span>
+										<span class="sc10_txt"></span>
+										<span class="sc11_txt"></span>
+										<span class="sc12_txt"></span>
+										<span class="sc13_txt"></span>
+										<span class="sc14_txt"></span>
+										<span class="sc15_txt"></span>
+										<span class="sc16_txt"></span>
+										<span class="sc17_txt"></span>
+										<span class="sc18_txt"></span>
+										<span class="total_spells_txt"></span>
+										<span class="ta1_txt"></span>
+										<span class="ta2_txt"></span>
+										<span class="ta3_txt"></span>
+										<span class="ta4_txt"></span>
+										<span class="ta5_txt"></span>
+										<span class="ta6_txt"></span>
+										<span class="ta7_txt"></span>
+										<span class="ta8_txt"></span>
+										<span class="ta9_txt"></span>
+										<span class="ta10_txt"></span>
+										<span class="ta11_txt"></span>
+										<span class="ta12_txt"></span>
+										<span class="ta13_txt"></span>
+										<span class="ta14_txt"></span>
+										<span class="ta15_txt"></span>
+										<span class="ta16_txt"></span>
+										<span class="ta17_txt"></span>
+										<span class="ta18_txt"></span>
+										<span class="tc1_txt"></span>
+										<span class="tc2_txt"></span>
+										<span class="tc3_txt"></span>
+										<span class="tc4_txt"></span>
+										<span class="tc5_txt"></span>
+										<span class="tc6_txt"></span>
+										<span class="tc7_txt"></span>
+										<span class="tc8_txt"></span>
+										<span class="tc9_txt"></span>
+										<span class="tc10_txt"></span>
+										<span class="tc11_txt"></span>
+										<span class="tc12_txt"></span>
+										<span class="tc13_txt"></span>
+										<span class="tc14_txt"></span>
+										<span class="tc15_txt"></span>
+										<span class="tc16_txt"></span>
+										<span class="tc17_txt"></span>
+										<span class="tc18_txt"></span>
+										<span class="total_traps_txt"></span>
+										<span class="da1_txt"></span>
+										<span class="da2_txt"></span>
+										<span class="da3_txt"></span>
+										<span class="da4_txt"></span>
+										<span class="da5_txt"></span>
+										<span class="da6_txt"></span>
+										<span class="da7_txt"></span>
+										<span class="da8_txt"></span>
+										<span class="da9_txt"></span>
+										<span class="da10_txt"></span>
+										<span class="da11_txt"></span>
+										<span class="da12_txt"></span>
+										<span class="da13_txt"></span>
+										<span class="da14_txt"></span>
+										<span class="da15_txt"></span>
+										<span class="dc1_txt"></span>
+										<span class="dc2_txt"></span>
+										<span class="dc3_txt"></span>
+										<span class="dc4_txt"></span>
+										<span class="dc5_txt"></span>
+										<span class="dc6_txt"></span>
+										<span class="dc7_txt"></span>
+										<span class="dc8_txt"></span>
+										<span class="dc9_txt"></span>
+										<span class="dc10_txt"></span>
+										<span class="dc11_txt"></span>
+										<span class="dc12_txt"></span>
+										<span class="dc13_txt"></span>
+										<span class="dc14_txt"></span>
+										<span class="dc15_txt"></span>
+										<span class="total_side_txt"></span>
+										<span class="ea1_txt"></span>
+										<span class="ea2_txt"></span>
+										<span class="ea3_txt"></span>
+										<span class="ea4_txt"></span>
+										<span class="ea5_txt"></span>
+										<span class="ea6_txt"></span>
+										<span class="ea7_txt"></span>
+										<span class="ea8_txt"></span>
+										<span class="ea9_txt"></span>
+										<span class="ea10_txt"></span>
+										<span class="ea11_txt"></span>
+										<span class="ea12_txt"></span>
+										<span class="ea13_txt"></span>
+										<span class="ea14_txt"></span>
+										<span class="ea15_txt"></span>
+										<span class="ec1_txt"></span>
+										<span class="ec2_txt"></span>
+										<span class="ec3_txt"></span>
+										<span class="ec4_txt"></span>
+										<span class="ec5_txt"></span>
+										<span class="ec6_txt"></span>
+										<span class="ec7_txt"></span>
+										<span class="ec8_txt"></span>
+										<span class="ec9_txt"></span>
+										<span class="ec10_txt"></span>
+										<span class="ec11_txt"></span>
+										<span class="ec12_txt"></span>
+										<span class="ec13_txt"></span>
+										<span class="ec14_txt"></span>
+										<span class="ec15_txt"></span>
+										<span class="total_extra_txt"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="kde_registration">
+							<span class="firstname_lbl">First Name:</span>
+							<input class="firstname_txt" type="text">
+							<span class="middlename_lbl">Middle Name(s):</span>
+							<input class="middlename_txt" type="text">
+							<span class="lastname_lbl">Last Name(s):</span>
+							<input class="lastname_txt" type="text">
+							<span class="id_lbl">Cossy ID:</span>
+							<input class="id_txt" type="text">
+							<span class="birth_lbl">Date of Birth:</span>
+							<input class="month_txt" type="text" maxlength="2">
+							<input class="day_txt" type="text" maxlength="2">
+							<input class="year_txt" type="text" maxlength="4">
+							<span class="event_lbl">Event Name:</span>
+							<input class="event_txt" type="text">
+							<span class="residence_lbl">Country of Residence:</span>
+							<input class="residence_txt" type="text">
+							<span class="email_lbl">E-Mail:</span>
+							<input class="email_txt" type="text">
+							<span class="date_lbl">Date:</span>
+							<input class="month2_txt" type="text" maxlength="2">
+							<input class="day2_txt" type="text" maxlength="2">
+							<input class="year2_txt" type="text" maxlength="4">
+							<input class="print_btn" type="submit" value="Print">
+							<div class="error_txt"></div>
+							<div class="print_decklist_btn">print decklist</div>
+							<div id="registration_form">
+								<div id="registration_content">
+									<img src="images/blank.png" alt="Registration" data-src="images/blank.png">
+									<div class="content">
+										<span class="firstname1_txt"></span>
+										<span class="firstname2_txt"></span>
+										<span class="firstname3_txt"></span>
+										<span class="firstname4_txt"></span>
+										<span class="firstname5_txt"></span>
+										<span class="firstname6_txt"></span>
+										<span class="firstname7_txt"></span>
+										<span class="firstname8_txt"></span>
+										<span class="firstname9_txt"></span>
+										<span class="firstname10_txt"></span>
+										<span class="firstname11_txt"></span>
+										<span class="firstname12_txt"></span>
+										<span class="firstname13_txt"></span>
+										<span class="middlename_txt"></span>
+										<span class="lastname1_txt"></span>
+										<span class="lastname2_txt"></span>
+										<span class="lastname3_txt"></span>
+										<span class="lastname4_txt"></span>
+										<span class="lastname5_txt"></span>
+										<span class="lastname6_txt"></span>
+										<span class="lastname7_txt"></span>
+										<span class="lastname8_txt"></span>
+										<span class="lastname9_txt"></span>
+										<span class="lastname10_txt"></span>
+										<span class="lastname11_txt"></span>
+										<span class="lastname12_txt"></span>
+										<span class="lastname13_txt"></span>
+										<span class="lastname14_txt"></span>
+										<span class="lastname15_txt"></span>
+										<span class="lastname16_txt"></span>
+										<span class="lastname17_txt"></span>
+										<span class="lastname18_txt"></span>
+										<span class="lastname19_txt"></span>
+										<span class="lastname20_txt"></span>
+										<span class="lastname21_txt"></span>
+										<span class="lastname22_txt"></span>
+										<span class="lastname23_txt"></span>
+										<span class="lastname24_txt"></span>
+										<span class="lastname25_txt"></span>
+										<span class="lastname26_txt"></span>
+										<span class="id1_txt"></span>
+										<span class="id2_txt"></span>
+										<span class="id3_txt"></span>
+										<span class="id4_txt"></span>
+										<span class="id5_txt"></span>
+										<span class="id6_txt"></span>
+										<span class="id7_txt"></span>
+										<span class="id8_txt"></span>
+										<span class="id9_txt"></span>
+										<span class="id10_txt"></span>
+										<span class="dob1_txt"></span>							
+										<span class="dob2_txt"></span>							
+										<span class="dob3_txt"></span>							
+										<span class="dob4_txt"></span>							
+										<span class="dob5_txt"></span>							
+										<span class="dob6_txt"></span>													
+										<span class="dob7_txt"></span>													
+										<span class="dob8_txt"></span>													
+										<span class="event_txt"></span>
+										<span class="country_txt"></span>
+										<span class="email1_txt"></span>
+										<span class="email2_txt"></span>
+										<span class="email3_txt"></span>
+										<span class="email4_txt"></span>
+										<span class="email5_txt"></span>
+										<span class="email6_txt"></span>
+										<span class="email7_txt"></span>
+										<span class="email8_txt"></span>
+										<span class="email9_txt"></span>
+										<span class="email10_txt"></span>
+										<span class="email11_txt"></span>
+										<span class="email12_txt"></span>
+										<span class="email13_txt"></span>
+										<span class="email14_txt"></span>
+										<span class="email15_txt"></span>
+										<span class="email16_txt"></span>
+										<span class="email17_txt"></span>
+										<span class="email18_txt"></span>
+										<span class="email19_txt"></span>
+										<span class="email20_txt"></span>
+										<span class="email21_txt"></span>
+										<span class="email22_txt"></span>
+										<span class="date1_txt"></span>
+										<span class="date2_txt"></span>
+										<span class="date3_txt"></span>
+										<span class="date4_txt"></span>
+										<span class="date5_txt"></span>
+										<span class="date6_txt"></span>
+										<span class="date7_txt"></span>
+										<span class="date8_txt"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="profile_viewer">
+					<div id="all_comments">
+						<span class="title_txt">User's Comments</span>
+						<span class="back_to_profile_btn">Back to Profile</span>
+						<div class="content"></div>
+						<span class="view_more_comments_btn">View More Comments</span>
+						<input class="room_exit_btn" type="submit" value="Exit">
+					</div>
+					<div id="profile_content" class="profile_content">
+						<div class="prev_btn prev_thumb_btn">
+							<img src="images/blank.png" alt="Prev" data-src="images/svg/prev_btn_up.svg">
+						</div>
+						<input class="nsfw_btn" type="submit" value="NSFW">
+						<div class="next_btn next_thumb_btn">
+							<img src="images/blank.png" alt="Next" data-src="images/svg/next_btn_up.svg">
+						</div>
+						<div class="stats">
+							<img class="stats_red" src="images/blank.png" alt="Stats" data-src="images/svg/stats_red.svg">
+							<img class="stats_teal" src="images/blank.png" alt="Stats" data-src="images/svg/stats_teal.svg">
+							<span class="status_lbl">Status:</span>
+							<span class="status_txt bisque">Online</span>
+							<span class="last_seen_lbl">Last Seen:</span>
+							<span class="last_seen_txt bisque">Now</span>
+							<span class="registered_lbl">Registered:</span>
+							<span class="registered_txt bisque">Jan 15, 2015, 12:38 AM</span>
+							<span class="format_txt">Advanced</span>
+							<span class="match_lbl">Match</span>
+							<span class="single_lbl">Single</span>
+							<span class="ranking_lbl">Ranking:</span>
+							<span class="match_ranking_txt bisque">Calculate</span>
+							<span class="single_ranking_txt bisque">Calculate</span>
+							<span class="rating_lbl">Rating/Exp:</span>
+							<span class="match_rating_txt bisque">100/0</span>
+							<span class="single_rating_txt bisque">100/0</span>
+							<span class="wins_lbl">Wins:</span>
+							<span class="match_wins_txt bisque">0</span>
+							<span class="single_wins_txt bisque">0</span>
+							<span class="losses_lbl">Losses:</span>
+							<span class="match_losses_txt bisque">0</span>
+							<span class="single_losses_txt bisque">0</span>
+							<span class="draws_lbl">Draws:</span>
+							<span class="match_draws_txt bisque">0</span>
+							<span class="single_draws_txt bisque">0</span>
+							<div id="stats_next_btn" class="next_btn">
+								<img src="images/blank.png" alt="Next" data-src="images/svg/next_btn_up.svg">
+							</div>
+						</div>
+						<span class="username_lbl arial_black2">Username:</span>
+						<input id="profile_username_txt" type="text">
+						<!--<div id="autocomplete"></div>-->
+						<input class="remove_btn" type="submit" value="Remove Image">
+						<div class="thumbs"></div>
+						<input class="nsfw_cb" type="checkbox">
+						<span class="nsfw_lbl">NSFW</span>
+						<div id="profile_song">
+							<div class="play_btn">
+								<img src="images/blank.png" alt="Play" data-src="images/svg/play_btn.svg">
+							</div>
+							<div class="pause_btn">
+								<img src="images/blank.png" alt="Pause" data-src="images/svg/pause_btn.svg">
+							</div>
+							<div class="name_lbl">
+								<span class="name_txt">Song name</span>
+							</div>
+						</div>
+						<div class="social_buttons">
+							<span class="send_pm_btn">Message</span>
+							<span class="follow_btn">Follow User</span>
+							<span class="unfollow_btn">Unfollow User</span>
+							<span class="add_friend_btn">Add Friend</span>
+							<span class="delete_friend_btn">Delete Friend</span>
+							<span class="accept_request_btn">Accept Request</span>
+							<span class="revoke_friend_btn">Revoke Request</span>
+							<span class="block_user_btn">Block User</span>
+							<span class="unblock_user_btn">Unblock User</span>
+							<span class="watch_duel_btn">Watch Duel</span>
+							<img class="key" src="images/blank.png" alt="Password Required" data-src="images/svg/key.svg">
+						</div>
+						<div class="social"></div>
+						<div id="profile_body">
+							<span class="profile_lbl kristenitc">Profile</span>
+							<div class="profile_txt textarea aliased" tabindex="0"></div>
+							<span class="views_lbl">Profile Views:</span>
+							<span class="views_txt bisque">9</span>
+							<img class="stats2_red" src="images/blank.png" alt="Stats" data-src="images/svg/stats2_red.svg">
+							<div class="about_lbl">Gender:<br>Distance:<br>Location:<br>Languages:</div>
+							<div class="about_txt">Male<br>5788 miles away<br>Occitanie, FR<br>French</div>
+							<span class="comments_lbl kristenitc">Comments: (6)</span>
+							<div class="comments selectable"></div>
+							<span class="view_all_comments_btn">View All Comments</span>
+							<div id="profile_bottom">
+								<span class="post_a_comment_lbl kristenitc">Post a comment:</span>
+								<textarea class="comment_txt" maxlength="500"></textarea>
+								<input class="reply_cb" type="checkbox">
+								<span class="reply_lbl bisque">Reply to: n****r</span>
+								<input class="post_comment_btn" type="submit" value="Post Comment">
+								
+								<span class="add_note_btn">Add Note</span>
+							</div>
+							<span class="friends_lbl kristenitc">Friends:</span>
+							<div class="friends"></div>
+							<span class="view_all_friends_btn">View All Friends</span>
+						</div>
+						<input class="room_exit_btn" type="submit" value="Exit">
+					</div>
+					<div id="all_friends">
+						<span class="title_txt selectable">Users's Friends</span>
+						<span class="back_to_profile_btn">Back to Profile</span>
+						<div class="content"></div>
+						<input class="room_exit_btn" type="submit" value="Exit">
+					</div>
+				</div>
+				<div id="profile_viewer2">
+					<div class="profile_content">
+						<div class="stats">
+							<span class="status_lbl">Status:</span>
+							<span class="status_txt bisque">Online</span>
+							<span class="last_seen_lbl">Last Seen:</span>
+							<span class="last_seen_txt bisque">Now</span>
+							<span class="profile_lbl kristenitc">Profile</span>
+							<textarea id="judge_profile_txt" maxlength="500"></textarea>
+							<div class="profile_txt selectable cyan"></div>
+						</div>
+						<span class="username_lbl arial_black2">Username:</span>
+						<div class="social_buttons">
+							<span class="send_pm_btn">Message</span>
+							<span class="watch_duel_btn">Watch Duel</span>
+							<img class="key" src="images/blank.png" alt="Password Required" data-src="images/svg/key.svg">
+						</div>
+						<div id="profile_body2">
+							<span class="testimonials_lbl kristenitc">No Testimonials</span>
+							<div id="profile_bottom2">
+								<span class="post_a_testionial_lbl kristenitc">Post a testimonial</span>
+								<textarea class="post_testimonial_txt"></textarea>
+								<input class="reply_cb" type="checkbox">
+								<span class="reply_lbl">Reply to:</span>
+								<input class="post_testimonial_btn" type="submit" value="Post Testimonial">
+								<select class="rating_cb">
+									<option value="0" label=" "></option>
+									<option value="1">I had a good experience</option>
+									<option value="-1">I had a bad experience</option>
+								</select>
+								<input class="room_exit_btn" type="submit" value="Exit">
+							</div>
+						</div>
+						<input class="save_btn" type="submit" value="Save Profile">
+						<input class="room_exit_btn" type="submit" value="Exit">
+					</div>
+				</div>
+				<div id="my_profile">
+					<div class="prev_btn prev_thumb_btn">
+						<img src="images/blank.png" alt="Prev" data-src="images/svg/prev_btn_up.svg">
+					</div>
+					<div class="next_btn next_thumb_btn">
+						<img src="images/blank.png" alt="Next" data-src="images/svg/next_btn_up.svg">
+					</div>
+					<input class="upload_avatar_btn" type="file" accept=".jpg, .png, .jpeg, .gif">
+					<input class="remove_btn" type="submit" value="Remove Image">
+					<div class="avatars"></div>
+					<span class="donation_txt">Donation Reward: 0 seconds left</span>
+					<input class="redeem_btn" type="submit" value="Redeem Donation">
+					<div class="info_btn">
+						<img src="images/blank.png" alt="Info" data-src="images/svg/info_btn_up.svg">
+					</div>
+					<div class="thumbs"></div>
+					<input class="nsfw_cb" type="checkbox">
+					<span class="nsfw_lbl">NSFW</span>
+					<span class="profile_lbl kristenitc">Profile:</span>
+					<textarea class="profile_txt" maxlength="5000"></textarea>
+					<input class="html_cb" type="checkbox">
+					<span class="html_lbl">Use HTML Text</span>
+					<input class="save_btn" type="submit" value="Save">
+					<div id="sleeve"></div>
+					<div id="prev_sleeve_btn">
+						<img src="images/blank.png" alt="Prev" data-src="images/svg/prev_sleeve_btn.svg">
+					</div>
+					<div id="next_sleeve_btn">
+						<img src="images/blank.png" alt="Next" data-src="images/svg/next_sleeve_btn.svg">
+					</div>
+					<input class="upload_btn" type="file" accept=".jpg, .png, .jpeg, .gif">
+					<input class="room_exit_btn" type="submit" value="Exit">
+					<div id="sleeve_select">
+						<div class="background"></div>
+						<div class="background_inner">
+							<div class="background"></div>
+							<div class="exit_btn">
+								<img src="images/blank.png" alt="Exit" data-src="images/svg/exit_btn_up.svg">
+							</div>
+							<span class="title_txt">SLEEVE</span>
+							<div class="content"></div>
+							<input class="save_sleeve_btn" type="submit" value="Save">
+						</div>
+					</div>
+				</div>
+				<div id="donations" class="arial_rounded18">
+					<div class="title_txt arial_black2 title1">Donations</div>
+					<div class="top">
+						<span class="email_lbl">Email:</span>
+						<span class="amount_lbl">Amount:</span>
+						<span class="transaction_lbl">Transaction ID:</span>
+						<span class="payment_lbl">Payment:</span>
+						<span class="date_lbl">Date:</span>
+						<span class="redeemed_lbl">Redeemed by:</span>
+					</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="rankings">
+					<select class="format_cb">
+						<option value="ar">Advanced</option>
+						<option value="gr">Goat Format</option>
+						<option value="sr">Speed Duels</option>
+					</select>
+					<select class="period_cb">
+						<option value="current">Current</option>
+						<option value="dec_2020">Dec 2020</option>
+						<option value="sep_2020">Sep 2020</option>
+						<option value="jun_2020">Jun 2020</option>
+						<option value="apr_2020">Apr 2020</option>
+						<option value="jan_2020">Jan 2020</option>
+						<option value="oct_2019">Oct 2019</option>
+						<option value="jul_2019">Jul 2019</option>
+						<option value="apr_2019">Apr 2019</option>
+						<option value="jan_2019">Jan 2019</option>
+						<option value="dec_2018">Dec 2018</option>
+						<option value="sep_2018">Sep 2018</option>
+						<option value="may_2018">May 2018</option>
+						<option value="feb_2018">Feb 2018</option>
+						<option value="nov_2017">Nov 2017</option>
+						<option value="sep_2017">Sep 2017</option>
+						<option value="jun_2017">Jun 2017</option>
+					</select>	
+					<div id="by_rating_btn"><span>By Rating</span></div>
+					<div id="by_rating_btn_activated"><span>By Rating</span></div>
+					<div id="by_wins_btn"><span>By Wins</span></div>
+					<div id="by_wins_btn_activated"><span>By Wins</span></div>
+					<div id="by_experience_btn"><span>By Experience</span></div>
+					<div id="by_experience_btn_activated"><span>By Experience</span></div>
+					<div id="by_total_experience_btn"><span>By Total Exp</span></div>
+					<div id="by_total_experience_btn_activated"><span>By Total Exp</span></div>
+					<div class="content"></div>
+					<input class="matches_rb" type="radio" name="match_type" checked>
+					<span class="matches_lbl">Matches</span>
+					<input class="singles_rb" type="radio" name="match_type">
+					<span class="singles_lbl">Singles</span>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="admin">
+					<div class="arial_black2 title2">Administrator Options</div>
+					<div class="admin_next_btn">
+						<img src="images/blank.png" alt="Next" data-src="images/svg/admin_next_btn_up.svg">
+					</div>
+					<div id="ban_status">
+						<span class="ban_status_lbl admin_lbl">Ban Status</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="get_ban_status_btn" type="submit" value="Get Ban Status">
+						<span class="status_lbl">Ban Status:</span>
+						<span class="status_txt"></span>
+						<span class="strikes_lbl">Strikes:</span>
+						<span class="strikes_txt"></span>
+						<span class="ban_note_lbl">Ban Notes:</span>
+						<div class="ban_note_txt textarea" tabindex="0"></div>
+					</div>
+					<div id="freeze_user">
+						<span class="freeze_user_lbl admin_lbl">Freeze User</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<span class="freeze_time_lbl">Freeze time:</span>
+						<input class="days_rb" type="radio" name="days" checked>
+						<input class="days_txt" type="text">
+						<span class="days_lbl">Days</span>
+						<input class="forever_rb" type="radio" name="days">
+						<span class="forever_lbl">Forever</span>
+						<span class="reason_lbl">Reason:</span>
+						<input class="reason_txt" type="text">
+						<input class="strike_cb" type="checkbox" checked>
+						<span class="strike_lbl">Increment Strike Count</span>
+						<input class="all_accounts_cb" type="checkbox" checked>
+						<span class="all_accounts_lbl">All Accounts</span>
+						<input class="freeze_user_btn" type="submit" value="Freeze User">
+					</div>
+					<div id="unban_user">
+						<span class="unban_user_lbl admin_lbl">Unban User</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="strike_cb" type="checkbox" checked>
+						<span class="strike_lbl">Decrement Strike Count</span>
+						<input class="all_accounts_cb" type="checkbox" checked>
+						<span class="all_accounts_lbl">All Accounts</span>
+						<input class="unban_user_btn" type="submit" value="Unban User">
+					</div>
+					<div id="kick_user">
+						<span class="kick_user_lbl admin_lbl">Kick User</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="kick_user_btn" type="submit" value="Kick User">
+					</div>
+					<div id="warning_note">
+						<span class="warning_note_lbl admin_lbl">Warning Note</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<span class="warning_lbl">Warning:</span>
+						<input class="warning_txt" type="text">
+						<input class="strike_cb" type="checkbox">
+						<span class="strike_lbl">Increment Strike Count</span>
+						<input class="add_warning_btn" type="submit" value="Add Warning">
+					</div>
+					<div id="cancel_duel">
+						<span class="cancel_duel_lbl admin_lbl">Cancel Duel</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="cancel_duel_btn" type="submit" value="Cancel Duel">
+					</div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="admin2">
+					<div class="arial_black2 title2">Administrator Options</div>
+					<div class="admin_prev_btn">
+						<img src="images/blank.png" alt="Prev" data-src="images/svg/admin_prev_btn_up.svg">
+					</div>
+					<div class="admin_next_btn">
+						<img src="images/blank.png" alt="Next" data-src="images/svg/admin_next_btn_up.svg">
+					</div>
+					<div id="ip_check">
+						<span class="ip_check_lbl admin_lbl">IP Check</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="check_ip_btn" type="submit" value="Check IP">
+						<span class="accounts_lbl">Accounts with Same IP Address:</span>
+						<input class="super_cb" type="checkbox" tabindex="-1">
+						<div class="alts_txt textarea" tabindex="0"></div>
+					</div>
+					<div id="computer_check">
+						<span class="computer_check_lbl admin_lbl">Computer Check</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="check_comp_btn" type="submit" value="Check Comp">
+						<span class="accounts_lbl">Accounts on the Same Computer:</span>
+						<div class="alts_txt textarea" tabindex="0"></div>
+					</div>
+					<div id="admin_status">
+						<span class="admin_status_lbl admin_lbl">Admin Status</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<span class="status_lbl">Status:</span>
+						<select class="status_cb">
+							<option value="0">User</option>
+							<option value="1">Administrator</option>
+							<option value="2">Senior Administrator</option>
+						</select>
+						<input class="judge_cb" type="checkbox" checked>
+						<span class="judge_lbl">Judge</span>
+						<input class="save_btn button2" type="submit" value="Save">
+					</div>
+					<div id="reset_stats">
+						<span class="reset_stats_lbl admin_lbl">Reset Stats</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="reset_btn" type="submit" value="Kick User and Reset Stats">
+					</div>
+					<div id="super_ban">
+						<span class="super_ban_lbl admin_lbl">Super Ban</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<span class="reason_lbl">Reason:</span>
+						<input class="reason_txt" type="text">
+						<input class="ban_btn" type="submit" value="Super Ban">
+					</div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="admin3">
+					<div class="arial_black2 title2">Administrator Options</div>
+					<div class="admin_prev_btn">
+						<img src="images/blank.png" alt="Prev" data-src="images/svg/admin_prev_btn_up.svg">
+					</div>
+					<div class="admin_next_btn">
+						<img src="images/blank.png" alt="Next" data-src="images/svg/admin_next_btn_up.svg">
+					</div>
+					<div id="alerts">
+						<span class="alerts_lbl admin_lbl">Alerts</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="add_user_btn" type="submit" value="Add User">
+						<span class="accounts_lbl">Accounts:</span>
+						<div class="users list"></div>
+					</div>
+					<div id="restricted_phrases">
+						<span class="restricted_phrases_lbl admin_lbl">Restricted Phrases</span>
+						<span class="phrase_lbl">Phrase:</span>
+						<input class="phrase_txt" type="text">
+						<input class="add_phrase_btn" type="submit" value="Add Phrase">
+						<span class="phrases_lbl">Phrases:</span>
+						<div class="phrases list"></div>
+						<input class="forever_cb" type="checkbox" tabindex="-1">
+						<span class="forever_lbl">Forever</span>
+					</div>
+					<div id="change_username">
+						<span class="change_username_lbl admin_lbl">Change Username</span>
+						<span class="current_lbl">Current:</span>
+						<input class="current_txt" type="text">
+						<span class="new_lbl">New:</span>
+						<input class="new_txt" type="text">
+						<input class="save_btn" type="submit" value="Save">
+					</div>
+					<div id="terminate_account">
+						<span class="terminate_account_lbl admin_lbl">Terminate Account</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="terminate_btn" type="submit" value="Terminate">
+					</div>
+					<div id="change_email">
+						<span class="change_email_lbl admin_lbl">Change Email</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<span class="email_lbl">Email:</span>
+						<input class="email_txt" type="text">
+						<input class="deactivate_cb" type="checkbox" checked>
+						<span class="deactivate_lbl">Deactivate</span>
+						<input class="save_btn" type="submit" value="Save">
+					</div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="switchboard">
+					<div class="arial_black2 title2">Administrator Options</div>
+					<div class="admin_prev_btn">
+						<img src="images/blank.png" alt="Prev" data-src="images/svg/admin_prev_btn_up.svg">
+					</div>
+					<div class="switchboard">
+						<span class="switchboard_lbl admin_lbl">Switch Board</span>
+						<input class="add_banned_ip_btn" type="submit" value="Add Banned IP">
+						<input class="add_bot_btn" type="submit" value="Add Bot">
+						<input class="add_duel_btn" type="submit" value="Add Duel">
+						<input class="allow_special_chars_btn" type="submit" value="Allow Special Chars">
+						<input class="cancel_reboot_btn" type="submit" value="Cancel Reboot">
+						<input class="cards_fingerprint_btn" type="submit" value="Cards Fingerprint">
+						<input class="check_deck_cards_btn" type="submit" value="Check Deck Cards">
+						<input class="check_mentions_btn" type="submit" value="Check Mentions">
+						<input class="crash_btn" type="submit" value="Crash">
+						<input class="empty_users_btn" type="submit" value="Empty Users">
+						<input class="garbage_collection_btn" type="submit" value="Garbage Collection">
+						<input class="get_detailed_actions_btn" type="submit" value="Get Detailed Actions">
+						<input class="kick_inactive_btn" type="submit" value="Kick Inactive">
+						<input class="load_announcement_btn" type="submit" value="Load Announcement">
+						<input class="lost_connections_btn" type="submit" value="Lost Connections">
+						<input class="reboot_server_btn" type="submit" value="Reboot Server">
+						<input class="refresh_cards_btn" type="submit" value="Refresh Cards">
+						<input class="reload_phrases_btn" type="submit" value="Reload Phrases">
+						<input class="remove_banned_ip_btn" type="submit" value="Remove Banned IP">
+						<input class="remove_bot_btn" type="submit" value="Remove Bot">
+						<input class="repair_statuses_btn" type="submit" value="Repair Statuses">
+						<input class="report_actions_btn" type="submit" value="Report Actions">
+						<input class="report_queries_btn" type="submit" value="Report Queries">
+						<input class="reset_decks_btn" type="submit" value="Reset Decks">
+						<input class="reset_searching_btn" type="submit" value="Reset Searching">
+						<input class="restrict_by_exp_btn" type="submit" value="Restrict By Exp">
+						<input class="restrict_by_new_btn" type="submit" value="Restrict By New">
+						<input class="skim_clients_btn" type="submit" value="Skim Clients">
+						<input class="skim_duels_btn" type="submit" value="Skim Duels">
+						<input class="skim_paused_games_btn" type="submit" value="Skim Paused Games">
+						<input class="skim_queries_btn" type="submit" value="Skim Queries">
+						<input class="skim_sockets_btn" type="submit" value="Skim Sockets">
+						<input class="skim_versions_btn" type="submit" value="Skim Versions">
+						<input class="toggle_alphabetizing_btn" type="submit" value="Toggle Alphabetizing">
+						<input class="toggle_kicking_websockets_btn" type="submit" value="Toggle Kicking Websockets">
+						<input class="toggle_rated_btn" type="submit" value="Toggle Rated">
+						<input class="toggle_ratings_btn" type="submit" value="Toggle Ratings">
+						<input class="update_user_btn" type="submit" value="Update User">
+						<input class="update_version_btn" type="submit" value="Update Version">
+						<input class="watch_threads_btn" type="submit" value="Watch Threads">
+						<input class="change_his_status_btn" type="submit" value="Change his status">
+					</div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="moderator">
+					<div class="arial_black2 title2">Moderator Options</div>
+					<div id="mute_user">
+						<span class="mute_user_lbl admin_lbl">Mute User</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<span class="seconds_lbl">Seconds:</span>
+						<input class="seconds_txt" type="text">
+						<input class="forever_cb" type="checkbox">
+						<span class="forever_lbl">Forever</span>
+						<input class="mute_btn" type="submit" value="Mute">
+					</div>
+					<div id="set_ignored">
+						<span class="set_ignored_lbl admin_lbl">Set Ignored</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="forever_cb" type="checkbox">
+						<span class="forever_lbl">Forever</span>
+						<input class="set_ignored_btn" type="submit" value="Set Ignored">
+					</div>
+					<div id="unmute_user">
+						<span class="unmute_user_lbl admin_lbl">Unmute User</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="unmute_btn" type="submit" value="Unmute">
+					</div>
+					<div id="unset_ignored">
+						<span class="unset_ignored_lbl admin_lbl">Unset Ignored</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="unset_ignored_btn" type="submit" value="Unset Ignored">
+					</div>
+					<div id="check_statuses">
+						<span class="check_statuses_lbl admin_lbl">Check Statuses</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="check_statuses_btn" type="submit" value="Check Statuses">
+					</div>
+					<div id="hide_messages">
+						<span class="hide_messages_lbl admin_lbl">Hide Messages</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<input class="hide_messages_btn" type="submit" value="Hide Messages">
+					</div>
+					<input type="submit" class="room_exit_btn" value="Exit">
+				</div>
+				<div id="settings">
+					<div id="settings_content">
+						<div class="arial_black2 title_txt title1">Settings</div>
+						<div class="about_me">
+							<span class="about_me_lbl admin_lbl">About Me</span>
+							<span class="gender_lbl">Gender:</span>
+							<select class="gender_cb">
+								<option value="" label=" "></option>
+								<option value="Male">Male</option>
+								<option value="Female">Female</option>
+							</select>
+							<span class="orientation_lbl">Orientation:</span>
+							<select class="orientation_cb">
+								<option value="" label=" "></option>
+								<option value="Straight">Straight</option>
+								<option value="Gay">Gay</option>
+								<option value="Bi">Bi</option>
+							</select>
+							<span class="languages_lbl">Languages:</span>
+							<input class="languages_txt" type="text" maxlength="50">
+							<input class="location_cb" type="checkbox" checked>
+							<span class="location_lbl">Show Location</span>
+							<input class="distance_cb" type="checkbox" checked>
+							<span class="distance_lbl">Show Distance</span>
+							<input class="save_btn" type="submit" value="Save">
+						</div>
+						<div class="profile_comments">
+							<span class="profile_comments_lbl admin_lbl">Profile Comments</span>
+							<span class="allow_comments_from_lbl">Allow Comments From:</span>
+							<select class="allow_comments_from_cb">
+								<option value="everyone">Everyone</option>
+								<option value="friends">Friends Only</option>
+								<option value="nobody">Nobody</option>
+							</select>
+							<input class="approval_cb" type="checkbox">
+							<span class="approval_lbl">Require Comment Approval</span>
+							<input class="save_btn" type="submit" value="Save">
+						</div>
+						<div class="messages">
+							<span class="messages_lbl admin_lbl">Messages</span>
+							<span class="allow_messages_from_lbl">Allow Messages From:</span>
+							<select class="allow_messages_from_cb">
+								<option value="everyone">Everyone</option>
+								<option value="friends">Friends Only</option>
+							</select>
+							<input class="offline_cb" type="checkbox" checked>
+							<span class="offline_lbl">Allow Offline Messages</span>
+							<input class="save_btn" type="submit" value="Save">
+						</div>
+						<div class="profile_song">
+							<span class="profile_song_lbl admin_lbl">Profile Song</span>
+							<span class="song_url_lbl">Song URL:</span>
+							<div class="info_btn">
+								<img src="images/blank.png" alt="Info" data-src="images/svg/info_btn_up.svg">
+							</div>
+							<input class="url_txt" type="text">
+							<span class="song_name_lbl">Song Name:</span>
+							<input class="name_txt" type="text">
+							<span class="song_artist_lbl">Song Artist:</span>
+							<input class="artist_txt" type="text">
+							<input class="remove_btn" type="submit" value="Remove Song">
+							<input class="save_btn" type="submit" value="Save Song">
+						</div>
+						<div class="duel_stats">
+							<span class="duel_stats_lbl admin_lbl">Duel Stats</span>
+							<input class="show_losses_cb" type="checkbox" checked>
+							<span class="show_losses_lbl">Show losses/draws on your profile</span>
+							<input class="save_btn" type="submit" value="Save">
+						</div>
+						<div class="social_media">
+							<span class="social_media_lbl admin_lbl">Social Media</span>
+							<span class="label_txt">Username:</span>
+							<input class="url_txt" type="text">
+							<select class="social_cb">
+								<option value="facebook">Facebook</option>
+								<option value="youtube">Youtube</option>
+								<option value="twitter">Twitter</option>
+								<option value="twitch">Twitch</option>
+								<!--<option value="tumblr">Tumblr</option>-->
+								<option value="instagram">Instagram</option>
+								<option value="discord">Discord</option>
+								<!--<option value="skype">Skype</option>-->
+								<option value="snapchat">Snapchat</option>
+								<!--<option value="kik">Kik</option>-->
+								<option value="duel_links">Duel Links</option>
+								<option value="pokemon_go">Pokemon Go</option>
+							</select>
+							<input class="save_btn" type="submit" value="Save">
+						</div>
+						<div class="preferences">
+							<span class="preferences_lbl admin_lbl">Preferences</span>
+							<input class="auto_cb" type="checkbox">
+							<span class="auto_lbl">Automatically Close Notifications</span>
+							<input class="nsfw_cb" type="checkbox">
+							<span class="nsfw_lbl">Always Show NSFW Content</span>
+							<input class="play_cb" type="checkbox">
+							<span class="play_lbl">Always Play Profile Songs</span>
+							<input class="save_btn" type="submit" value="Save">
+						</div>
+						<div class="animation">
+							<span class="animation_lbl admin_lbl">Animation</span>
+							<span class="animation_txt">Animation:</span>
+							<select class="animation_cb">
+								<option value="min">Minimum</option>
+								<option value="max">Maximum</option>
+							</select>
+							<span class="resolution_txt">Resolution:</span>
+							<select class="resolution_cb">
+								<option value="l">Low Resolution</option>
+								<option value="m">Medium Resolution</option>
+								<option value="h">High Resolution</option>
+							</select>
+							<input class="save_btn" type="submit" value="Save">
+						</div>
+						<div class="account">
+							<span class="account_lbl admin_lbl">Account</span>
+							<!--<input class="remember_cb" type="checkbox" />
+							<span class="remember_lbl">Remember Me</span>
+							<div class="info_btn">
+								<img src="images/svg/info_btn_up.svg" />
+							</div>-->
+							<span class="end_all_lbl">End All Sessions:</span>
+							<input class="logout_btn" type="submit" value="Logout">
+						</div>
+						<input class="room_exit_btn" type="submit" value="Exit">
+					</div>
+				</div>
+				<div id="confirm_email">
+					<img class="email_logo" src="images/blank.png" width="434" height="434" alt="Email" data-src="images/email_small.png">
+					<div class="confirm_email">
+						<span class="confirm_email_lbl admin_lbl">Confirm Email</span>
+						<span class="email_lbl">Email:</span>
+						<input class="email_txt" type="text">
+						<input class="confirm_btn" type="submit" value="Resend Email Confirmation Link">
+					</div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="messages">
+					<div class="arial_black2 title1">Messages</div>
+					<div class="cout_txt textarea" tabindex="0"></div>
+					<input class="cin_txt" type="text" maxlength="500">
+					<div class="messages_content"></div>
+					<span class="search_messages_lbl">Search Messages:</span>
+					<input class="search_messages_txt" type="text">
+					<span class="filter_users_lbl">Filter Users:</span>
+					<input class="filter_users_txt" type="text">
+					<input class="timestamps_cb" type="checkbox">
+					<span class="timestamps_lbl">Show Timestamps</span>
+					<input class="html_cb" type="checkbox">
+					<span class="html_lbl">HTML</span>
+					<span class="filter_messages_lbl">Filter Messages:</span>
+					<input class="filter_messages_txt" type="text">
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="browse_users">
+					<div class="title_txt arial_black2 title1">Browse Users</div>
+					<div id="browse">
+						<div class="browse_txt aliased">BROWSE</div>
+						<span class="username_lbl">Username contains:</span>
+						<input class="username_txt" type="text">
+						<input class="online_cb" type="checkbox">
+						<span class="online_lbl">Online users only</span>
+						<input class="pics_cb" type="checkbox">
+						<span class="pics_lbl">Users with custom pics only</span>
+						<span class="gender_lbl">Gender:</span>
+						<input class="all_genders_rb" type="radio" name="gender" checked>
+						<span class="all_genders_lbl">All</span>
+						<input class="male_rb" type="radio" name="gender">
+						<span class="male_lbl">Male</span>
+						<input class="female_rb" type="radio" name="gender">
+						<span class="female_lbl">Female</span>
+						<span class="orientation_lbl">Orientation:</span>
+						<input class="all_orientations_rb" type="radio" name="orientation" checked>
+						<span class="all_orientations_lbl">All</span>
+						<input class="straight_rb" type="radio" name="orientation">
+						<span class="straight_lbl">Straight</span>
+						<input class="gay_rb" type="radio" name="orientation">
+						<span class="gay_lbl">Gay</span>
+						<input class="bi_rb" type="radio" name="orientation">
+						<span class="bi_lbl">Bi</span>
+						<span class="rating_rep_lbl">Rating/Rep:</span>
+						<input class="matches_rb" type="radio" name="match_type" checked>
+						<span class="matches_lbl">Matches</span>
+						<input class="singles_rb" type="radio" name="match_type">
+						<span class="singles_lbl">Singles</span>
+						<span class="rating_lbl">≤ Rating ≤ </span>
+						<input class="rating_lower_txt" type="text">
+						<input class="rating_upper_txt" type="text">
+						<span class="rep_lbl">≤ Experience ≤</span>
+						<input class="rep_lower_txt" type="text">
+						<input class="rep_upper_txt" type="text">
+						<span class="location_lbl">Location:</span>
+						<span class="language_lbl">Language:</span>
+						<input class="location_txt" type="text">
+						<input class="language_txt" type="text">
+						<span class="social_media_lbl">Social Media:</span>
+						<span class="distance_lbl">Distance:</span>
+						<select class="social_cb">
+							<option value="" label=" "></option>
+							<option value="facebook">Facebook</option>
+							<option value="youtube">Youtube</option>
+							<option value="twitter">Twitter</option>
+							<option value="twitch">Twitch</option>
+							<option value="tumblr">Tumblr</option>
+							<option value="instagram">Instagram</option>
+							<option value="discord">Discord</option>
+							<option value="skype">Skype</option>
+							<option value="snapchat">Snapchat</option>
+							<option value="kik">Kik</option>
+							<option value="duel_links">Duel Links</option>
+							<option value="pokemon_go">Pokemon Go</option>
+						</select>
+						<select class="distance_cb">
+							<option value="">Anywhere</option>
+							<!--<option value="5">5 miles</option>
+							<option value="25">25 miles</option>
+							<option value="100">100 miles</option>-->
+						</select>
+						<span class="last_seen_lbl">Last seen:</span>
+						<span class="order_by_lbl">Order by:</span>
+						<select class="last_seen_cb">
+							<option value="">Anytime</option>
+							<option value="hour">This Hour</option>
+							<option value="day">This Day</option>
+							<option value="week">This Week</option>
+							<option value="month">This Month</option>
+						</select>
+						<select class="order_cb">
+							<option value="login">Last Seen</option>
+							<!--<option value="distance">Distance</option>-->
+							<option value="username">Username</option>
+							<option value="rating">Rating</option>
+							<option value="experience">Experience</option>
+						</select>
+					</div>
+					<input class="update_location_btn" type="submit" value="Update Location">
+					<input class="search_btn" type="submit" value="Search">
+					<input class="room_exit_btn" type="submit" value="Exit">
+					<div class="content"></div>
+					<input class="following_cb" type="checkbox">
+					<span class="following_lbl">Following</span>
+					<input class="friends_cb" type="checkbox">
+					<span class="friends_lbl">Friends</span>
+				</div>
+				<div id="friend_requests">
+					<div class="title_txt arial_black2 title1">Friend Requests</div>
+					<select class="received_cb">
+						<option value="received">Received Requests</option>
+						<option value="sent">Sent Requests</option>
+					</select>
+					<div class="content"></div>
+					<span class="accept_all_btn arial_rounded25">Accept All Requests</span>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="friends">
+					<div class="title_txt arial_black2 title1">Friends</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="followed_users">
+					<div class="title_txt arial_black2 title1">Followed Users</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="blocked_users">
+					<div class="title_txt arial_black2 title1">Blocked Users</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="comments">
+					<div class="title_txt arial_black2 title1">Profile Comments</div>
+					<select class="received_cb">
+						<option value="received">Received Comments</option>
+						<option value="sent">Sent Comments</option>
+					</select>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="change_password">
+					<img class="boss_key" src="images/blank.png" width="628" height="472" alt="Key" data-src="images/boss_key_small.png">
+					<div class="change_password">
+						<span class="change_password_lbl admin_lbl">Change Password</span>
+						<span class="current_lbl">Current Password:</span>
+						<input class="current_txt" type="password">
+						<span class="new_lbl">New Password:</span>
+						<input class="new_txt" type="password">
+						<span class="confirm_lbl">Confirm New Password:</span>
+						<input class="confirm_txt" type="password">
+						<input class="change_btn" type="submit" value="Change Password">
+					</div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="duel_records">
+					<div class="title_txt arial_black2 title1">Duel Records</div>
+					<span class="username_lbl">Username:</span>
+					<input class="username_txt" type="text">
+					<select class="type_cb">
+						<option value="" label=" "></option>
+						<option value="Rated Matches">Rated Matches</option>
+						<option value="Rated Singles">Rated Singles</option>
+						<option value="Unrated Matches">Unrated Matches</option>
+						<option value="Unrated Singles">Unrated Singles</option>
+					</select>
+					<select class="period_cb">
+						<option value="current">Current</option>
+						<option value="dec_2020">Dec 2020</option>
+						<option value="sep_2020">Sep 2020</option>
+						<option value="jun_2020">Jun 2020</option>
+						<option value="apr_2020">Apr 2020</option>
+						<option value="jan_2020">Jan 2020</option>
+						<option value="oct_2019">Oct 2019</option>
+						<option value="jul_2019">Jul 2019</option>
+						<option value="apr_2019">Apr 2019</option>
+						<option value="jan_2019">Jan 2019</option>
+						<option value="dec_2018">Dec 2018</option>
+						<option value="sep_2018">Sep 2018</option>
+						<option value="may_2018">May 2018</option>
+						<option value="feb_2018">Feb 2018</option>
+						<option value="nov_2017">Nov 2017</option>
+						<option value="sep_2017">Sep 2017</option>
+						<option value="jun_2017">Jun 2017</option>
+						<option value="">All Time</option>
+					</select>
+					<div class="info arial_rounded18">
+						<span class="opponent_lbl">Opponent</span>
+						<span class="rating_lbl">Rating/Exp</span>
+						<span class="rules_lbl">Rules</span>
+						<span class="result_lbl">Result</span>
+						<span class="points_lbl">Points</span>
+						<span class="new_lbl">New Rating</span>
+						<span class="date_lbl">Date</span>
+					</div>
+					<div class="content"></div>
+					<span class="filter_lbl">Filter Users:</span>
+					<input class="filter_txt" type="text">
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="tournament_locator">
+					<div class="title_txt arial_black2 title1">Tournament Locator</div>
+					<div class="store_header bisque">
+						<span class="location_lbl">LOCATION</span>
+						<span class="distance_lbl">DISTANCE</span>
+						<span class="contact_lbl">CONTACT</span>
+					</div>
+					<div class="store_search">
+						<div class="desc">Find an Official Konami Tournament Store in your area that  holds Yu-Gi-Oh! TRADING CARD GAME Tournaments.  Please contact your local Official Tournament Store directly  for more information about their Tournaments.</div>
+						<span class="tourney_lbl">Search Store/Event:</span>
+						<select class="tourney_cb">
+							<option value="ots">Official Tournament Store</option>
+							<option value="rts">Regional Qualifier Location</option>
+							<option value="ycs">YCS Events</option>
+							<option value="past">Past Events</option>
+						</select>
+						<span class="location_lbl">City and State or Zip Code:</span>
+						<input class="location_txt" type="text">
+						<span class="position_lbl">Use Current Position:</span>
+						<input class="position_cb" type="checkbox">
+						<input class="search_btn" type="submit" value="Search">
+					</div>
+					<div class="content"></div>
+					<span class="reviews_lbl kristenitc">Reviews:</span>
+					<div class="reviews_content"></div>
+					<div id="post_review">
+						<span class="post_review_lbl kristenitc">Post a Review</span>
+						<textarea class="review_txt"></textarea>
+						<input class="post_review_btn" type="submit" value="Post Review">
+					</div>
+					<input class="back_btn" type="submit" value="Back">
+					<input class="room_exit_btn" type="submit" value="Exit">
+					<span id="post_review_btn">Post Review</span>
+					<div id="map">
+						<div class="exit_btn">
+							<img src="images/blank.png" alt="Exit" data-src="images/svg/exit_btn_up.svg">
+						</div>
+						<div class="map_content"></div>
+					</div>
+				</div>
+				<div id="custom_cards">
+					<span class="card_passcode_lbl">Passcode:</span>
+					<input class="card_passcode_txt" type="text">
+					<span class="card_tcg_lbl">TCG:</span>
+					<input class="card_tcg_cb" type="checkbox">
+					<span class="show_effect_lbl">Show Effect:</span>
+					<input class="is_effect_cb" type="checkbox">
+					<span class="card_ocg_lbl">OCG:</span>
+					<input class="card_ocg_cb" type="checkbox">
+					<input id="upload_card_btn" type="submit" value="Upload Card">
+					<input id="edit_card_btn" type="submit" value="Edit Card">
+					<input id="my_cards_btn" type="submit" value="My Cards">
+					<input class="room_exit_btn" type="submit" value="Exit">
+					<div id="my_card"></div>
+					<div class="prev_btn">
+						<img src="images/blank.png" alt="Prev" data-src="images/svg/prev_btn_up.svg">
+					</div>
+					<div class="next_btn">
+						<img src="images/blank.png" alt="Next" data-src="images/svg/next_btn_up.svg">
+					</div>
+					<input class="clear_btn" type="submit" value="Clear Card">
+					<input class="delete_btn" type="submit" value="Delete Card">
+					<div id="upload_card" class="uploader">
+						<div class="background"></div>
+						<div class="title_txt aliased">UPLOAD</div>
+						<span class="name_lbl">Name:</span>
+						<input class="name_txt" type="text" maxlength="100">
+						<span class="desc_lbl">Effect:</span>
+						<textarea class="desc_txt"></textarea>
+						<span class="card_lbl">Card Type:</span>
+						<select class="card_cb">
+							<option value="" label=" "></option>
+							<option value="Monster">Monster</option>
+							<option value="Spell">Spell</option>
+							<option value="Trap">Trap</option>
+						</select>
+						<span class="card2_lbl">Category:</span>
+						<select class="card2_cb">
+							<option value="" label=" "></option>
+							<option value="Normal">Normal</option>
+							<option value="Effect">Effect</option>
+							<option value="Ritual">Ritual</option>
+							<option value="Fusion">Fusion</option>
+							<option value="Synchro">Synchro</option>
+							<option value="Xyz">Xyz</option>
+							<option value="Link">Link</option>
+						</select>
+						<span class="type_lbl">Type:</span>
+						<select class="type_cb"></select>
+						<span class="type2_lbl">Ability:</span>
+						<select class="type2_cb">
+							<option value="" label=" "></option>
+							<option value="Gemini">Gemini</option>
+							<option value="Spirit">Spirit</option>
+							<option value="Toon">Toon</option>
+							<option value="Tuner">Tuner</option>
+							<option value="Union">Union</option>
+						</select>
+						<span class="attrib_lbl">Attribute:</span>
+						<select class="attrib_cb">
+							<option value="" label=" "></option>
+							<option value="DARK">DARK</option>
+							<option value="DIVINE">DIVINE</option>
+							<option value="EARTH">EARTH</option>
+							<option value="FIRE">FIRE</option>
+							<option value="LIGHT">LIGHT</option>
+							<option value="WATER">WATER</option>
+							<option value="WIND">WIND</option>
+						</select>
+						<span class="level_lbl">Level / Rank / Link:</span>
+						<input class="level_txt" type="text" maxlength="2">
+						<span class="atk_lbl">ATK:</span>
+						<input class="atk_txt" type="text" maxlength="4">
+						<span class="def_lbl">DEF:</span>
+						<input class="def_txt" type="text" maxlength="4">
+						<span class="pendulum_lbl">Pendulum:</span>
+						<input class="pendulum_cb" type="checkbox">
+						<span class="scale_lbl">Pendulum Scale:</span>
+						<input class="scale_txt" type="text">
+						<span class="pendulum_effect_lbl">Pend.<br>Effect:</span>
+						<textarea class="pendulum_effect_txt"></textarea>
+						<span class="arrows_lbl">Link<br>Markers:</span>
+						<div class="arrows">
+							<div class="arrow arrow1">
+								<img src="images/blank.png" alt="Top Left" data-src="images/card/black_arrow_corner.png">
+							</div>
+							<div class="arrow arrow2">
+								<img src="images/blank.png" alt="Top Center" data-src="images/card/black_arrow_side.png">
+							</div>
+							<div class="arrow arrow3">
+								<img src="images/blank.png" alt="Top Right" data-src="images/card/black_arrow_corner.png">
+							</div>
+							<div class="arrow arrow4">
+								<img src="images/blank.png" alt="Middle Right" data-src="images/card/black_arrow_side.png">
+							</div>
+							<div class="arrow arrow5">
+								<img src="images/blank.png" alt="Bottom Right" data-src="images/card/black_arrow_corner.png">
+							</div>
+							<div class="arrow arrow6">
+								<img src="images/blank.png" alt="Bottom Center" data-src="images/card/black_arrow_side.png">
+							</div>
+							<div class="arrow arrow7">
+								<img src="images/blank.png" alt="Bottom Left" data-src="images/card/black_arrow_corner.png">
+							</div>
+							<div class="arrow arrow8">
+								<img src="images/blank.png" alt="Middle Left" data-src="images/card/black_arrow_side.png">
+							</div>
+						</div>
+						<span class="rush_lbl">Rush:</span>
+						<input class="rush_cb" type="checkbox">
+						<span class="legend_lbl">Legend:</span>
+						<input class="legend_cb" type="checkbox">
+						<span class="privacy_lbl">Available To:</span>
+						<select class="privacy_cb">
+							<option value="2">Myself Only</option>
+							<option value="1">Everyone</option>
+						</select>
+						<input class="upload_btn" type="submit" value="Upload">
+						<input class="browse_btn" type="submit" value="Browse Image">
+					</div>
+					<div id="edit_card"></div>
+					<div class="cards"></div>
+					<input class="ocg_limit_rb" type="radio" name="limit">
+					<input class="browse2_btn" type="file">
+				</div>
+				<div id="customs">
+					<div class="title_txt arial_black2 title1">Customs</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="admin_actions">
+					<div class="title_txt arial_black2 title1">Admin Actions</div>
+					<div class="top">
+						<span class="admin_lbl">Admin:</span>
+						<input class="admin_txt" type="text">
+						<span class="user_lbl">User:</span>
+						<input class="user_txt" type="text">
+						<span class="action_lbl">Action:</span>
+						<select class="action_cb"></select>
+						<span class="limit_lbl">Limit:</span>
+						<select class="limit_cb">
+							<option value="50">50</option>
+							<option value="100">100</option>
+							<option value="200">200</option>
+							<option value="500">500</option>
+						</select>
+					</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="frozen_users">
+					<div class="title_txt arial_black2 title2">Frozen Users</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="beginners">
+					<div class="title_txt arial_black2 title2">Beginners</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="notes">
+					<div class="title_txt arial_black2 title2">Notes</div>
+					<div class="content"></div>
+					<input class="room_exit_btn" type="submit" value="Exit">
+				</div>
+				<div id="tournaments">
+					<div class="title_txt arial_black2 title1">Tournaments</div>
+					<div class="subtitle_txt arial_black2 subtitle"></div>
+					<select class="period_sel">
+						<option value="current">Current Tournaments</option>
+						<option value="past">Past Tournaments</option>
+					</select>
+					<div class="content">
+						<input type="submit" class="join_tourney_btn" value="Join Tournament">		
+						
+						
+						
+						
+						
+						<div id="tourney_members">
+							<div class="adjudicators_list">
+								<div class="adjudicators_txt kristenitc">Adjudicators:</div>
+								<div class="expand_btn">
+									<img src="images/blank.png" alt="Add Adjudicator" data-src="images/svg/expand_btn_up.svg">
+								</div>
+							</div>
+							<div class="members_list">
+								<div class="title_txt kristenitc">Players:</div>
+								<div class="expand_btn">
+									<img src="images/blank.png" alt="Add Adjudicator" data-src="images/svg/expand_btn_up.svg">
+								</div>
+							</div>
+						</div>
+						
+						
+						
+						
+						
+					</div>
+					<div id="accept_members_bg">
+						<img src="images/blank.png" alt="Host" data-src="images/svg/host.svg">
+						<span class="host_lbl arial_black2">Add Players</span>
+						<div id="accept_members">
+							<div class="joinlist list"></div>
+							<input class="accept_btn" type="submit" value="Accept User">
+							<input class="reject_btn" type="submit" value="Reject User">
+							<input class="check_btn" type="submit" value="Check Deck">
+							<input class="invite_btn" type="submit" value="Invite Friends">
+						</div>
+					</div>
+					
+					
+					<!--<div id="add_adjudicator">
+						<span class="add_adjudicator_lbl admin_lbl">Add Adjudicator</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text" />
+						<input class="add_adjudicator_btn" type="submit" value="Add Adjudicator" />
+					</div>
+					
+					<div id="remove_adjudicator">
+						<span class="remove_adjudicator_lbl admin_lbl">Remove Adjudicator</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text" />
+						<input class="remove_adjudicator_btn" type="submit" value="Remove Adjudicator" />
+					</div>
+					
+					<div id="remove_player">
+						<span class="remove_player_lbl admin_lbl">Remove Player</span>
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text" />
+						<input class="remove_player_btn" type="submit" value="Remove Player" />
+					</div>-->
+					
+					<div id="pairings"></div>
+					
+					<div id="standings">
+						<span class="rank_lbl">Rank</span>
+						<span class="player_lbl">Player</span>
+						<span class="score_lbl">Score</span>
+						<div class="players"></div>
+					</div>
+					
+					
+					<input class="create_tourney_btn" type="submit" value="Create Tourney">
+					<input class="back_btn" type="submit" value="Back">
+					<input class="room_exit_btn" type="submit" value="Exit">
+					<div id="create_tourney">
+						<div class="background"></div>
+						<div class="background_inner">
+							<div class="background"></div>
+							<div class="exit_btn">
+								<img src="images/blank.png" alt="Exit" data-src="images/svg/exit_btn_up.svg">
+							</div>
+							<span class="title_txt">Create Tourney</span>
+							<div class="inner_content">
+								<span class="name_lbl">Name:</span>
+								<input type="text" class="name_txt">
+								<span class="desc_lbl">Description:</span>
+								<textarea class="desc_txt"></textarea>
+								<span class="match_format_lbl">Match Format:</span>
+								<select class="match_format_sel">
+									<option value="single elimination">Single Elimination</option>
+									<!--<option value="double elimination">Double Elimination</option>-->
+									<option value="swiss">Swiss</option>
+								</select>
+								<span class="match_type_lbl">Match Type:</span>
+								<select class="match_type_sel">
+									<option value="s">Singles</option>
+									<option value="m">Matches</option>
+								</select>
+								<span class="restrict_lbl">Allow 1 player per IP:</span>
+								<input type="checkbox" class="restrict_cb">
+								
+								<span class="max_lbl">Max participants:</span>
+								<input type="text" class="max_txt" value="16">
+								<!--<span class="no_limit_lbl">No limit:</span>
+								<input type="checkbox" class="no_limit_cb" />-->
+								
+								<!--<span class="deck_check_lbl">Deck check:</span>
+								<input type="checkbox" class="deck_check_cb" />-->
+								
+								<div class="preview"></div>
+								<input class="browse_btn" type="submit" value="Browse Image">
+								<input class="browse2_btn" type="file" accept=".jpg, .png, .jpeg, .gif">
+								
+								<!--<input class="start_registration_btn" type="submit" value="Start Registration" />-->
+								<input class="start_registration_btn" type="submit" value="Create Tourney">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="duel">
+					<img id="field_spell_pic" src="images/blank.png" alt="Field Spell" data-src="images/blank.png">
+					<div id="rps_start" class="duel_frame"></div>
+					<div id="tp_start" class="duel_frame">
+						<img id="field_decks" class="field_decks" src="images/blank.png" alt="Decks" data-src="images/svg/field_decks.svg">
+					</div>
+					<div id="tp_start2" class="duel_frame">
+						<img id="field_decks2" class="field_decks" src="images/blank.png" alt="Decks" data-src="images/svg/field_decks2.svg">
+					</div>
+					<div id="duel_start" class="duel_frame">
+						<img id="field_zones" class="field_zones" src="images/blank.png" alt="Field" data-src="images/svg/field_zones.svg">
+					</div>
+					<div id="duel_start2" class="duel_frame">
+						<img id="field_zones2" class="field_zones" src="images/blank.png" alt="Field" data-src="images/svg/field_zones2.svg">
+					</div>
+					<div id="duel_start3" class="duel_frame">
+						<img id="field_zones3" class="field_zones" src="images/blank.png" alt="Field" data-src="images/svg/field_zones3.svg">
+					</div>
+					<div id="duel_start4" class="duel_frame">
+						<img id="field_zones4" class="field_zones" src="images/blank.png" alt="Field" data-src="images/svg/field_zones4.svg">
+					</div>
+					<div id="ss_spiral">
+						<img src="images/blank.png" alt="Spiral" data-src="images/ss_spiral_small.png">
+					</div>
+					<div id="ss_glow">
+						<img src="images/blank.png" alt="Glow" data-src="images/ss_glow_small.png">
+					</div>
+					<div id="field"></div>
+					<div class="preview"></div>
+					<div id="duel_content" class="duel_frame">
+						<div id="field_content">
+							<div id="die_btn">
+								<img src="images/blank.png" alt="Die" data-src="images/svg/die_btn_up.svg">
+							</div>
+							<div id="coin_btn">
+								<img src="images/blank.png" alt="Coin" data-src="images/svg/coin_btn_up.svg">
+							</div>
+							<div class="token_btn">
+								<img src="images/blank.png" width="30" height="28" alt="Tokwn" data-src="images/token_btn_up.png">
+							</div>
+							<span id="lp_txt">LP:</span>
+							<input id="life_txt" type="text">
+							<img id="minus_bg" src="images/blank.png" alt="Glow" data-src="images/svg/yellow_glow.svg">
+							<div id="plus_btn">
+								<img src="images/blank.png" alt="Plus" data-src="images/svg/plus_btn.svg">
+							</div>
+							<div id="minus_btn">
+								<img src="images/blank.png" alt="Minus" data-src="images/svg/minus_btn.svg">
+							</div>
+							<div id="turn">
+								<img class="background" src="images/blank.png" alt="Turn Background" data-src="images/svg/turn_background.svg">
+								<img class="blue" src="images/blank.png" alt="Turn Blue" data-src="images/svg/turn_blue.svg">
+								<img class="red" src="images/blank.png" alt="Turn Red" data-src="images/svg/turn_red.svg">
+								<span class="arial_rounded20">TURN</span>
+							</div>
+							<div id="start_turn">
+								<img class="background" src="images/blank.png" alt="Turn Background" data-src="images/svg/turn_background.svg">
+								<img class="green" src="images/blank.png" alt="Turn Green" data-src="images/svg/turn_green.svg">
+								<img class="red" src="images/blank.png" alt="Turn Red" data-src="images/svg/turn_red.svg">
+								<span class="start_turn_txt arial_rounded20">Start Turn</span>
+								<img class="white_glow" src="images/blank.png" alt="Glow" data-src="images/svg/white_glow.svg">
+							</div>
+							<div id="end_turn">
+								<img class="background" src="images/blank.png" alt="Turn Background" data-src="images/svg/turn_background.svg">
+								<img class="red" src="images/blank.png" alt="Turn Red" data-src="images/svg/turn_red.svg">
+								<img class="green" src="images/blank.png" alt="Turn Green" data-src="images/svg/turn_green.svg">
+								<img class="yellow" src="images/blank.png" alt="Turn Yellow" data-src="images/svg/turn_yellow.svg">
+								<span class="end_turn_txt arial_rounded20">End Turn</span>
+								<img class="white_glow" src="images/blank.png" alt="Glow" data-src="images/svg/white_glow.svg">
+							</div>
+						</div>
+						<div id="field_stats">
+							<span id="hm1_txt"></span>
+							<span id="hm2_txt"></span>
+							<span id="hm3_txt"></span>
+							<span id="hm4_txt"></span>
+							<span id="hm5_txt"></span>
+							<span id="om1_txt"></span>
+							<span id="om2_txt"></span>
+							<span id="om3_txt"></span>
+							<span id="om4_txt"></span>
+							<span id="om5_txt"></span>
+							<span id="hl_txt"></span>
+							<span id="ol_txt"></span>					
+						</div>
+						<div id="counters"></div>
+						<div id="hidden_spots">
+							<div class="untouchable">
+								<span id="m1_hidden"></span>
+								<span id="m2_hidden"></span>
+								<span id="m3_hidden"></span>
+								<span id="m4_hidden"></span>
+								<span id="m5_hidden"></span>							
+								<span id="opp_m1_hidden"></span>
+								<span id="opp_m2_hidden"></span>
+								<span id="opp_m3_hidden"></span>
+								<span id="opp_m4_hidden"></span>
+								<span id="opp_m5_hidden"></span>
+								<span id="link_left_hidden"></span>
+								<span id="link_right_hidden"></span>
+							</div>
+							<span id="deck_hidden"></span>
+							<span id="grave_hidden"></span>
+							<span id="banished_hidden"></span>
+							<span id="extra_hidden"></span>
+							<span id="opp_deck_hidden"></span>
+							<span id="opp_grave_hidden"></span>
+							<span id="opp_banished_hidden"></span>
+							<span id="opp_extra_hidden"></span>
+						</div>
+						<div id="numbers">
+							<span id="cid1_txt"></span>
+							<span id="cig1_txt"></span>
+							<span id="cib1_txt"></span>
+							<span id="cie1_txt"></span>
+							<span id="cid2_txt"></span>
+							<span id="cig2_txt"></span>
+							<span id="cib2_txt"></span>
+							<span id="cie2_txt"></span>
+						</div>
+						<div id="select_zones">
+							<div id="m1_select"></div>
+							<div id="m2_select"></div>
+							<div id="m3_select"></div>
+							<div id="m4_select"></div>
+							<div id="m5_select"></div>
+							<div id="s1_select"></div>
+							<div id="s2_select"></div>
+							<div id="s3_select"></div>
+							<div id="s4_select"></div>
+							<div id="s5_select"></div>
+							<div id="link_left_select"></div>
+							<div id="link_right_select"></div>
+						</div>
+						
+						<div class="cards"></div>
+						<div id="spark"></div>
+						
+						<div id="red_stream"></div>
+						<div id="blue_stream"></div>
+						<div class="red_target target">
+							<img src="images/blank.png" alt="Target" data-src="images/svg/red_target.svg">
+						</div>
+						<div class="blue_target target">
+							<img src="images/blank.png" alt="Target" data-src="images/svg/blue_target.svg">
+						</div>
+						<div class="green_target target">
+							<img src="images/blank.png" alt="Target" data-src="images/svg/green_target.svg">
+						</div>
+						<div id="sword">
+							<img src="images/blank.png" alt="Sword" data-src="images/svg/sword.svg">
+						</div>
+						<div id="coin">
+							<img class="tails" src="images/blank.png" alt="Tails" data-src="images/coin_tails.png">
+							<img class="heads" src="images/blank.png" alt="Heads" data-src="images/coin_heads.png">
+						</div>
+						<div id="die" class="reset">
+							<div id="side1" class="face">
+								<div class="shader"></div>
+							</div>
+							<div id="side2" class="face">
+								<div class="shader"></div>
+							</div>
+							<div id="side3" class="face">
+								<div class="shader"></div>
+							</div>
+							<div id="side4" class="face">
+								<div class="shader"></div>
+							</div>
+							<div id="side5" class="face">
+								<div class="shader"></div>
+							</div>
+							<div id="side6" class="face">
+								<div class="shader"></div>
+							</div>
+						</div>
+						<div id="choose_zones">
+							<div class="background"></div>
+							<input id="choose_zones_cb" type="checkbox" checked>
+							<span id="choose_zones_lbl">Choose Zones</span>
+						</div>
+						<div id="good_btn" class="like_btn">
+							<img src="images/blank.png" alt="All Good" data-src="images/svg/like_btn_up.svg">
+						</div>
+						<input id="auto_draw_cb" type="checkbox" checked>
+						<span id="auto_draw_lbl">Auto-Draw</span>
+						<div id="shuffle_btn">
+							<img src="images/blank.png" width="30" height="30" alt="Shuffle" data-src="images/hand_cards.jpg">
+							<div class="blue">
+								<span class="shuffle_lbl">Shuffle</span>
+							</div>
+						</div>
+						<div id="show_hand_btn">
+							<img class="hand" src="images/blank.png" alt="Hand" data-src="images/svg/hand.svg">
+							<img src="images/blank.png" width="30" height="30" alt="Show Hand" data-src="images/hand_cards.jpg">
+							<div class="blue">
+								<span class="show_lbl">Show</span>
+							</div>
+						</div>
+						<div id="view">
+							<img class="background" src="images/blank.png" alt="View Cards" data-src="images/svg/view.svg">
+							<span class="title_txt arial_rounded20">Viewing Graveyard</span>
+							<div class="expand_btn">
+								<img src="images/blank.png" alt="Add Card" data-src="images/svg/expand_btn_up.svg">
+							</div>
+							<div class="exit_btn">
+								<img src="images/blank.png" alt="Exit" data-src="images/svg/exit_btn_up.svg">
+							</div>
+							<div class="content"></div>
+						</div>
+					</div>
+					<div id="siding" class="duel_frame">
+						<img class="deck_constructor" src="images/blank.png" alt="Deck" data-src="images/svg/deck_constructor.svg">
+						<img id="skill_bg" src="images/blank.png" width="29" height="29" alt="Glow" data-src="images/svg/blue_glow.svg">
+						<div id="skill_btn">
+							<img src="images/blank.png" width="29" height="29" alt="Skill" data-src="images/skill_btn.png">
+						</div>
+						<span id="siding_in_progress">Siding in progress! Please wait...</span>
+					</div>
+					<div id="viewing"></div>
+					<div id="overlay">
+						<img src="images/blank.png" alt="Overlay" data-src="images/svg/overlay.svg">
+					</div>
+					<div id="watchers_btn">
+						<img src="images/blank.png" width="34" height="34" alt="Watchers" data-src="images/watchers_btn_up.png">
+					</div>
+					<div id="log_btn">
+						<img src="images/blank.png" width="41" height="37" alt="Duel Log" data-src="images/log_btn_up.png">
+					</div>
+					<input id="siding_btn" type="submit" value="Begin Siding">
+					<input id="defeat_btn" type="submit" value="Admit Defeat">
+					<input id="swap_btn" type="submit" value="Swap Cards">
+					<input id="opponent_loss_btn" type="submit" value="Opponent Loss">
+					<input id="draw_btn" type="submit" value="Offer Draw">
+					<input id="reset_btn" type="submit" value="Reset Deck">
+					<input id="host_loss_btn" type="submit" value="Host Loss">
+					<input id="call_admin_btn" type="submit" value="Call Judge">
+					<input id="rematch_btn" type="submit" value="Offer Rematch">
+					<input id="cancel_duel_btn" type="submit" value="Cancel Duel">
+					<input id="duel_quit_btn" type="submit" value="Quit">
+					<div id="watchers">
+						<span class="watchers_txt">Watchers: 0</span>
+						<div class="users list"></div>
+					</div>
+					<div id="lifepoints2" class="lifepoints">
+						<div class="life_bar">
+							<div class="black_bar"></div>
+						</div>
+						<div class="life_border"></div>
+						<span class="life_txt">8000</span>
+					</div>
+					<span id="done_siding2">Done siding!</span>
+					<div id="avatar2" class="duel_avatar">
+						<img class="image" src="images/blank.png" alt="Loading" data-src="images/loading.gif">
+						<div class="nsfw"></div>
+						<img class="all_good" src="images/blank.png" alt="All Good" data-src="images/svg/like_btn_up.svg">
+						<div id="bubbles2" class="bubbles"></div>
+						<div class="rating">
+							<span class="rating_txt">rating/rep</span>
+						</div>
+						<input class="nsfw_btn" type="submit" value="Show Image">
+						<span class="username_txt selectable">Username</span>
+					</div>
+					<div id="avatar4" class="duel_avatar">
+						<img class="image" src="images/blank.png" alt="Loading" data-src="images/loading.gif">
+						<div class="nsfw"></div>
+						<img class="all_good" src="images/blank.png" alt="All Good" data-src="images/svg/like_btn_up.svg">
+						<div id="bubbles4" class="bubbles"></div>
+						<div class="rating">
+							<span class="rating_txt">rating/rep</span>
+						</div>
+						<input class="nsfw_btn" type="submit" value="Show Image">
+						<span class="username_txt selectable">Username</span>
+					</div>
+					<div id="status2" class="duel_status">
+						<span class="status_txt arial_rounded25"></span>
+					</div>
+					<div id="gone2" class="gone"></div>
+					<div id="countdown2">300</div>
+					<div class="cout_txt textarea" tabindex="0"></div>
+					<div class="refresh_btn">
+						<div class="refresh_bg"></div>
+						<img src="images/blank.png" alt="Refresh" data-src="images/svg/refresh_btn.svg">
+					</div>
+					<input class="cin_txt" type="text" maxlength="500">
+					<input class="html_cb" type="checkbox">
+					<div id="avatar1" class="duel_avatar">
+						<img class="image" src="images/blank.png" alt="Loading" data-src="images/loading.gif">
+						<div class="nsfw"></div>
+						<div id="bubbles1" class="bubbles"></div>
+						<div class="rating">
+							<span class="rating_txt">rating/rep</span>
+						</div>
+						<input class="nsfw_btn" type="submit" value="Show Image">
+						<img class="all_good" src="images/blank.png" alt="All Good" data-src="images/svg/like_btn_up.svg">
+						<span class="username_txt selectable">Username</span>
+					</div>
+					<div id="avatar3" class="duel_avatar">
+						<img class="image" src="images/blank.png" alt="Loading" data-src="images/loading.gif">
+						<div class="nsfw"></div>
+						<img class="all_good" src="images/blank.png" alt="All Good" data-src="images/svg/like_btn_up.svg">
+						<div id="bubbles3" class="bubbles"></div>
+						<div class="rating">
+							<span class="rating_txt">rating/rep</span>
+						</div>
+						<input class="nsfw_btn" type="submit" value="Show Image">
+						<span class="username_txt selectable">Username</span>
+					</div>
+					<div id="status1" class="duel_status">
+						<span class="status_txt arial_rounded25"></span>
+					</div>
+					<input id="pause_btn" type="submit" value="Pause Game">
+					<div id="gone1" class="gone"></div>
+					<div id="countdown1">300</div>
+					<div id="over">
+						<img src="images/blank.png" alt="Over" data-src="images/svg/over.svg">
+						<span class="title_txt">Duel Over</span>
+						<span class="body_txt"></span>
+						<div class="ok_btn">
+							<img src="images/blank.png" alt="OK" data-src="images/svg/ok_btn_up.svg">
+						</div>
+					</div>
+					<div id="lifepoints1" class="lifepoints">
+						<div class="life_bar">
+							<div class="black_bar"></div>
+						</div>
+						<div class="life_border"></div>
+						<span class="life_txt">8000</span>
+					</div>
+					<input id="done_siding_btn" type="submit" value="Done Siding">
+					<span id="done_siding1">Done siding!</span>
+				</div>
+			</div>
+			<div id="chats">
+				<div id="online_users" class="chat">
+					<div class="chat_top">
+						<div class="chat_top_bg">
+							<span>Online Users</span>
+						</div>
+						<div class="minimize_btn">
+							<img src="images/svg/minimize_btn_up.svg" alt="Minimize">
+						</div>
+					</div>
+					<div class="chat_background">
+						<div class="users list"></div>
+						<input class="search_txt" type="text">
+						<div class="black_line"></div>
+						<span class="total_txt">Users online:  0</span>
+					</div>
+				</div>
+				<div id="calls" class="chat">
+					<div class="chat_top">
+						<div class="chat_top_bg">
+							<span>Admin</span>
+						</div>
+						<div class="minimize_btn">
+							<img src="images/svg/minimize_btn_up.svg" alt="Minimize">
+						</div>
+					</div>
+					<div class="chat_background">
+						<div class="calls_btn tab_btn selected">Calls</div>
+						<div class="tools_btn tab_btn">Tools</div>
+						<div class="log_btn tab_btn">Log</div>
+					</div>
+					<div class="calls list"></div>
+					<div class="tools">
+						<span class="username_lbl">Username:</span>
+						<input class="username_txt" type="text">
+						<select class="action_cb"></select>
+						<input class="days_rb" type="radio" name="days2" checked>
+						<input class="days_txt" type="text">
+						<span class="days_lbl">Days</span>
+						<input class="forever_rb" type="radio" name="days2">
+						<span class="forever_lbl">Forever</span>
+						<span class="reason_lbl">Reason:</span>
+						<input class="reason_txt" type="text">
+						<input class="strike_cb" type="checkbox" checked>
+						<span class="strike_lbl">Increment Strike Count</span>
+						<input class="all_accounts_cb" type="checkbox" checked>
+						<span class="all_accounts_lbl">All Accounts</span>
+						<span class="status_txt">Status:</span>
+						<span class="strikes_txt">Strikes:</span>
+						<input class="submit_btn" type="submit" value="Freeze User">
+						<div class="result_txt textarea" tabindex="0"></div>
+					</div>
+					<div class="log">
+						<div class="log_txt textarea" tabindex="0"></div>
+						<div id="log_cycle"></div>
+						<div class="log_tools">
+							<input class="chat_cb" type="checkbox" checked>
+							<span class="chat_lbl">Chat</span>
+							<input class="duel_cb" type="checkbox" checked>
+							<span class="duel_lbl">Duel</span>
+							<input class="game_cb" type="checkbox" checked>
+							<span class="game_lbl">Game</span>
+							<div class="refresh_btn">
+								<div class="refresh_bg"></div>
+								<img src="images/svg/refresh_btn.svg" alt="Refresh">
+							</div>
+							<input class="private_cb" type="checkbox" checked>
+							<span class="private_lbl">Private Info</span>
+							<input class="usernames_cb" type="checkbox">
+							<span class="usernames_lbl">Usernames</span>
+							<div class="black_line"></div>
+							<input class="search_txt" type="text">
+							<img class="lookup" src="images/svg/lookup.svg" alt="Search">
+							<input class="export_btn" type="submit" value="Export">
+						</div>
+					</div>
+					<div class="black_line"></div>
+					<span class="calls_lbl">Calls:   0</span>
+				</div>
+				<div id="public_chat" class="chat">
+					<div class="chat_top">
+						<div class="chat_top_bg">
+							<span>Public Chat</span>
+						</div>
+						<div class="refresh_btn">
+							<div class="refresh_bg"></div>
+							<img src="images/svg/refresh_btn.svg" alt="Refresh">
+						</div>
+						<div class="expand_btn">
+							<img src="images/svg/expand_btn_up.svg" alt="Expand">
+						</div>
+						<div class="minimize2_btn">
+							<img src="images/svg/minimize2_btn_up.svg" alt="Minimize">
+						</div>
+						<div class="minimize_btn">
+							<img src="images/svg/minimize_btn_up.svg" alt="Minimize">
+						</div>
+					</div>
+					<div class="chat_background">
+						<div class="cout_txt textarea" tabindex="0"></div>
+						<div id="public_chat_cycle"></div>
+						<input class="cin_txt" type="text" maxlength="500">
+						<input class="html_cb" type="checkbox">
+					</div>
+				</div>
+				<div id="private_chat" class="chat">
+					<div class="chat_top">
+						<div class="chat_top_bg">
+							<span>Private Chat</span>
+						</div>
+						<div class="refresh_btn">
+							<div class="refresh_bg"></div>
+							<img src="images/svg/refresh_btn.svg" alt="Refresh">
+						</div>
+						<div class="minimize_btn">
+							<img src="images/svg/minimize_btn_up.svg" alt="Minimize">
+						</div>
+						<div class="exit_btn">
+							<img src="images/svg/exit_btn_up.svg" alt="Exit">
+						</div>
+					</div>
+					<div class="chat_background">
+						<div class="cout_txt textarea" tabindex="0"></div>
+						<div id="private_chat_cycle"></div>
+						<input class="cin_txt" type="text" maxlength="500">
+						<div class="users list"></div>
+						<input class="html_cb" type="checkbox">
+					</div>
+				</div>
+				<div id="watch_chat" class="chat">
+					<div class="chat_top">
+						<div class="chat_top_bg">
+							<span>Watcher's Chat</span>
+						</div>
+						<div class="refresh_btn">
+							<div class="refresh_bg"></div>
+							<img src="images/svg/refresh_btn.svg" alt="Refresh">
+						</div>
+						<div class="minimize_btn">
+							<img src="images/svg/minimize_btn_up.svg" alt="Minimize">
+						</div>
+					</div>
+					<div class="chat_background">
+						<div class="cout_txt textarea" tabindex="0"></div>
+						<div id="watch_chat_cycle"></div>
+						<input class="cin_txt" type="text" maxlength="500">
+						<input class="html_cb" type="checkbox">
+					</div>
+				</div>
+				<div id="duel_log" class="chat">
+					<div class="chat_top">
+						<div class="chat_top_bg">
+							<span>Duel Log</span>
+						</div>
+						<div class="export_btn">
+							<img src="images/svg/export_btn.svg" alt="Export">
+						</div>
+						<div class="minimize_btn">
+							<img src="images/svg/minimize_btn_up.svg" alt="Minimize">
+						</div>
+					</div>
+					<div class="chat_background">
+						<div class="log">
+							<div class="log_txt textarea" tabindex="0"></div>
+							<div class="log_tools">
+								<input class="chat_cb" type="checkbox" checked>
+								<span class="chat_lbl">Chat</span>
+								<input class="duel_cb" type="checkbox" checked>
+								<span class="duel_lbl">Duel</span>
+								<input class="game_cb" type="checkbox" checked>
+								<span class="game_lbl">Game</span>
+								<input class="private_cb" type="checkbox" checked>
+								<span class="private_lbl">Private Info</span>
+								<input class="usernames_cb" type="checkbox">
+								<span class="usernames_lbl">Usernames</span>
+								<div class="black_line"></div>
+								<input class="search_txt" type="text">
+								<img class="lookup" src="images/svg/lookup.svg" alt="Search">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="action_list"></div>
+			</div>
+			<div id="screenshot_btn">
+				<div class="hidden"></div>
+				<img src="images/svg/screenshot_btn_up.svg" alt="Screenshot">
+			</div>
+			<div id="welcome_buttons">
+				<span id="skip_intro_btn">Skip Intro</span>
+				<span id="welcome_btn">Welcome</span>
+				<span id="forum_btn">Forum</span>
+				<span id="rules_btn">Rules</span>
+				<span id="blog_btn">Blog</span>
+			</div>
+			<div id="chat_buttons">
+				<div id="online_btn">
+					<img src="images/svg/online_btn_up.svg" alt="Online Users">
+				</div>
+				<div id="tools_btn">
+					<img src="images/svg/tools_btn_up.svg" alt="Admin">
+				</div>
+				<div id="chat_btn">
+					<img src="images/svg/chat_btn_up.svg" alt="Public Chat">
+				</div>
+				<div id="private_btn">
+					<img src="images/svg/private_btn_up.svg" alt="Private Chat">
+				</div>
+				<div id="private_btn_anim">
+					<img src="images/svg/private_btn_anim.svg" alt="Private Chat">
+				</div>
+			</div>
+			<div id="mute_btn">
+				<img src="images/svg/mute_btn_up.svg" alt="Sound">
+			</div>
+			<div id="cross">
+				<img src="images/svg/cross.svg" alt="Sound Off">
+			</div>
+			<div id="tooltips" class="aliased">
+				<div id="online_users_tooltip">Online Users</div>
+				<div id="public_chat_tooltip">Public Chat</div>
+				<div id="private_chat_tooltip">Private Chat</div>
+				<div id="call_tooltip">Admin</div>
+				<div id="watch_chat_tooltip">Watchers</div>
+				<div id="log_tooltip">Log</div>
+				<div id="randomize_tooltip">Randomize</div>
+			</div>
+			<div id="notifications"></div>
+			<div id="actions">
+				<div class="background"></div>
+				<div class="background_inner">
+					<div class="background"></div>
+					<div class="exit_btn">
+						<img src="images/svg/exit_btn_up.svg" alt="Exit">
+					</div>
+					<div class="actions_txt textarea" tabindex="0"></div>
+				</div>
+			</div>
+			<div id="dim"></div>
+			<span id="reconnecting" class="connection_status2">Reconnecting...</span>
+			<!--<div id="reconnecting" class="connection_status2">
+				<span>Reconnecting...</span>
+			</div>-->
+			<div id="msg">
+				<span class="title_txt">Message</span>
+				<div class="body_txt selectable"></div>
+				<div class="ok_btn">
+					<img src="images/svg/ok_btn_up.svg" alt="OK">
+				</div>
+			</div>
+			<div id="confirm">
+				<span class="title_txt">Message</span>
+				<div class="body_txt selectable"></div>
+				<div class="yes_btn">
+					<img src="images/svg/yes_btn_up.svg" alt="Yes">
+				</div>
+				<div class="no_btn">
+					<img src="images/svg/no_btn_up.svg" alt="No">
+				</div>
+			</div>
+			<div id="confirm2">
+				<span class="title_txt">Message</span>
+				<div class="body_txt selectable"></div>
+				<div class="yes_btn">
+					<img src="images/svg/yes_btn_up.svg" alt="Yes">
+				</div>
+				<div class="no_btn">
+					<img src="images/svg/no_btn_up.svg" alt="No">
+				</div>
+				<div class="cancel_btn">
+					<img src="images/svg/cancel_btn_up.svg" alt="Cancel">
+				</div>
+			</div>
+			<div id="input">
+				<span class="title_txt">Message</span>
+				<div class="body_txt selectable">Enter your input below</div>
+				<input class="input_txt" type="text">
+				<div class="ok_btn">
+					<img src="images/svg/ok_btn_up.svg" alt="OK">
+				</div>
+				<div class="cancel_btn">
+					<img src="images/svg/cancel_btn_up.svg" alt="Cancel">
+				</div>
+			</div>
+			<div id="combo">
+				<span class="title_txt">Message</span>
+				<div class="body_txt selectable">Enter your input below</div>
+				<select class="combo_cb"></select>
+				<div class="ok_btn">
+					<img src="images/svg/ok_btn_up.svg" alt="OK">
+				</div>
+				<div class="cancel_btn">
+					<img src="images/svg/cancel_btn_up.svg" alt="Cancel">
+				</div>
+			</div>
+			<div id="mobile_txt" class="textarea"></div>
+		</div>
+		<div id="mes1"></div>
+		<div id="mes2"></div>
+		<div id="mes3"></div>
+		<div id="mes4"></div>
+		<script src="static/utils.js?v=491"></script>
+		<script src="static/duel.js?v=491"></script>
+		<script src="static/main.js?v=491"></script>
+		<script src="static/dom-to-image.min.js" async></script>
+		<script src="static/html2canvas.min.js" async></script>
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyCqQoQ3PGTEyg8vGyYlwQJP0MXZ_mOXI4o" async></script>
+	</body>
+</html>
+<script>showMes = 1; banner_ad = '<div class="banner-ad" align="center"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"><\/script><ins class="adsbygoogle" style="display: inline-block; width: 728px; height: 90px; pointer-events: auto;" data-ad-client="ca-pub-8917830655675593" data-ad-slot="2153284745"><\/ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script><\/div>'; skinny_ad = '<span class="skinny-ad" align="right"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"><\/script><ins class="adsbygoogle" style="display: inline-block; width: 160px; height: 600px; pointer-events: auto;" data-ad-client="ca-pub-8917830655675593" data-ad-slot="2898742749"><\/ins><script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script><\/span>';</script><script>cards_fingerprint = 298; VERSION = 491;</script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61656057-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
